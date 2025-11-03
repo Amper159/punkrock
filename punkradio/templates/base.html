@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Punkrock rádio{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>::selection{background:#b91c1c;color:#fff}</style>
+</head>
+<body class="bg-neutral-950 text-neutral-100">
+<header class="sticky top-0 z-40 backdrop-blur border-b border-neutral-800 bg-neutral-950/80">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <a href="/" class="font-black text-lg text-red-600">Punkrock&nbsp;rádio</a>
+    <nav class="hidden md:flex gap-6 text-sm">
+      <a href="/novinky" class="hover:underline hover:text-red-500">Novinky</a>
+      <a href="/kapely" class="hover:underline hover:text-red-500">Kapely</a>
+      <a href="/koncerty" class="hover:underline hover:text-red-500">Koncerty</a>
+      <a href="/galerie" class="hover:underline hover:text-red-500">Galerie</a>
+    </nav>
+  </div>
+</header>
+
+<main class="min-h-[60vh]">{% block content %}{% endblock %}</main>
+
+<footer class="border-t border-neutral-800 py-10 text-center text-sm text-neutral-400">
+  © {{ today.year }} Punkrock rádio • Všechna práva vyřvána.
+</footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Galerie — Punkrock rádio{% endblock %}
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h1 class="text-3xl font-extrabold mb-6">Galerie</h1>
+  {% if images %}
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {% for img in images %}
+    <img src="{{ img }}" class="rounded-xl border border-neutral-800" alt="punk-foto-{{ loop.index }}" />
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-neutral-400">Zatím žádné fotky. Nahraj je do složky <code>static/uploads</code>.</p>
+  {% endif %}
+</section>
+{% endblock %}

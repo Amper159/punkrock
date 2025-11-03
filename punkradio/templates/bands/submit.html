@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Přidat kapelu — Punkrock rádio{% endblock %}
+{% block content %}
+<section class="max-w-3xl mx-auto px-4 py-12">
+  <h1 class="text-2xl font-extrabold mb-4">Přihlášení nové kapely</h1>
+
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% if msgs %}
+      <div class="mb-4 space-y-2">
+        {% for cat, msg in msgs %}
+          <div class="px-3 py-2 rounded border border-red-500 text-red-300">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" class="grid gap-3">
+    {{ form.csrf_token }}
+    <label class="grid gap-1">
+      <span class="text-sm">Název kapely*</span>
+      {{ form.name(class_="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm", required=True) }}
+      {% for e in form.name.errors %}<small class="text-red-400">{{ e }}</small>{% endfor %}
+    </label>
+    <label class="grid gap-1">
+      <span class="text-sm">Město</span>
+      {{ form.city(class_="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm") }}
+    </label>
+    <label class="grid gap-1">
+      <span class="text-sm">Styl(y)</span>
+      {{ form.styles(class_="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm", placeholder="punk, hardcore, street punk") }}
+    </label>
+    <label class="grid gap-1">
+      <span class="text-sm">O kapele</span>
+      {{ form.about(class_="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm") }}
+    </label>
+    <div class="grid md:grid-cols-3 gap-3">
+      {{ form.spotify(class_="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm", placeholder="Spotify URL") }}
+      {{ form.bandcamp(class_="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm", placeholder="Bandcamp URL") }}
+      {{ form.web(class_="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm", placeholder="Web URL") }}
+    </div>
+    <div class="flex justify-end">
+      <button class="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-neutral-100 font-semibold">Odeslat ke schválení</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

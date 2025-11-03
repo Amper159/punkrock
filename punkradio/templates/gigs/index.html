@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Koncerty — Punkrock rádio{% endblock %}
+{% block content %}
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h1 class="text-3xl font-extrabold mb-6">Koncerty</h1>
+  <form method="get" class="mb-6 flex gap-2">
+    <input type="text" name="city" value="{{ request.args.get('city','') }}" placeholder="Město"
+           class="rounded-xl border border-neutral-700 bg-neutral-900/60 px-3 py-2 text-sm" />
+    <button class="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-neutral-100 text-sm">Filtrovat</button>
+  </form>
+  <ul class="space-y-3">
+    {% for g in gigs %}
+    <li class="border border-red-700 rounded-2xl p-4 bg-red-900/20">
+      <strong>{{ g.date.strftime('%d.%m.%Y') }}</strong> – {{ g.city }}, {{ g.venue }}{% if g.lineup %} • {{ ' · '.join(g.lineup) }}{% endif %}
+    </li>
+    {% else %}
+    <p class="text-neutral-400">Nic nenalezeno.</p>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

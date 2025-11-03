@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+instance/
+.env
+.env.*
+# venv
+.venv/
+venv/
+# IDE
+.vscode/
+.idea/
+# Node (kdyby něco)
+node_modules/
+# build/cache
+dist/
+build/
+.mypy_cache/
+.pytest_cache/
