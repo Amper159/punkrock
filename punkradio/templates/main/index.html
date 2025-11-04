@@ -49,6 +49,9 @@
     {% endfor %}
   </ul>
 </section>
+{% for c in concerts %}
+  <p>{{ c.band }} - {{ c.date }} - {{ c.venue }}</p>
+{% endfor %}
 
 
 {% endblock %}

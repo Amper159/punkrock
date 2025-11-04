@@ -1,7 +1,7 @@
 from flask import Flask
 from .config import Config
 from .extensions import db, migrate, csrf
-
+from punkradio.blueprints.gigs import bp as gigs_bp
 
 
 

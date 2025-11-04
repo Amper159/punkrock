@@ -1,14 +1,17 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template
 from punkradio.models import Gig
 from datetime import date
 
 bp = Blueprint("gigs", __name__)
 
-@bp.get("/")
-def list_gigs():
-    city = request.args.get("city")
-    q = Gig.query.filter(Gig.date >= date.today())
-    if city:
-        q = q.filter(Gig.city.ilike(f"%{city}%"))
-    gigs = q.order_by(Gig.date.asc()).all()
-    return render_template("gigs/index.html", gigs=gigs)
+def get_upcoming_concerts(limit=4):
+    today = date.today()
+    return Gig.query.filter(Gig.date >= today).order_by(Gig.date.asc()).limit(limit).all()
+
+@bp.route("/koncerty")
+def koncerty():
+    concerts = Gig.query.order_by(Gig.date.asc()).all()
+    return render_template("gigs/index.html", concerts=concerts)
+
+
+
