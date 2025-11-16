@@ -1,0 +1,123 @@
+/* 🎸 Punkrock Rádio – základní stylování webu */
+/* ========================================== */
+
+/* 🔲 Reset stylů */
+body, h1, h2, h3, p, ul, li, a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+/* 🖤 Základní vzhled stránky */
+body {
+  background-color: #0c0c0c;
+  color: #e4e4e4;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔻 Navigace */
+nav {
+  background-color: #000;
+  border-bottom: 1px solid #b22222;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav a {
+  color: #e4e4e4;
+  font-weight: 500;
+  margin: 0 15px;
+  transition: color 0.2s ease;
+}
+
+nav a:hover {
+  color: #ff4040;
+}
+
+/* 🩸 Nadpisy */
+h1, h2, h3 {
+  color: #ff4040;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 🧱 Sekce obsahu */
+.container {
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* 🧧 Odkazy */
+a {
+  color: #ff4040;
+  transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #ff6666;
+}
+
+/* 🩶 Tlačítka */
+button, .btn {
+  background-color: #b22222;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover, .btn:hover {
+  background-color: #ff4040;
+}
+
+/* 🎤 Box koncertů */
+.gig-card {
+  background-color: #1a0f0f;
+  border: 1px solid #b22222;
+  border-radius: 15px;
+  width: 70%;
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto 20px auto;
+  transition: all 0.25s ease-in-out;
+  padding: 15px;
+}
+
+.gig-card:hover {
+  transform: scale(1.02);
+  border-color: #ff4040;
+  box-shadow: 0 0 12px rgba(255, 64, 64, 0.3);
+}
+
+/* 🕶️ Patička */
+footer {
+  background-color: #000;
+  color: #888;
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #b22222;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #ff4040;
+}
+
+footer a:hover {
+  color: #ff6666;
+}
+

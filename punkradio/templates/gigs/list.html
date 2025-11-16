@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Koncerty{% endblock %}
+
+{% block content %}
+<section class="container py-5 text-center">
+  <h1 class="mb-4 text-danger fw-bold">Nejbližší koncerty</h1>
+
+  {% if gigs %}
+    <div class="d-flex flex-column align-items-center">
+      {% for gig in gigs %}
+        <div class="gig-card mb-3 p-3">
+          <p class="mb-1 fw-bold text-light" style="font-size: 1.1rem;">
+            📅 {{ gig.date.strftime("%d.%m.%Y") if gig.date else "?" }}
+          </p>
+          
+          <p class="mb-1 text-danger" style="font-size: 1.1rem;">
+            🎸 {{ gig.lineup | join(' | ') if gig.lineup else "Neznámá kapela" }}
+          </p>
+          
+          <p class="text-secondary" style="font-size: 1rem;">
+            📍 {{ gig.city or "Neznámé město" }}{% if gig.venue %} – {{ gig.venue }}{% endif %}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted py-5">Žádné koncerty nejsou momentálně k dispozici.</p>
+  {% endif %}
+</section>
+{% endblock %}
