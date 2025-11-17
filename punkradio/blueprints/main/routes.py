@@ -6,6 +6,13 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def index():
-    gigs = gigs = Gig.query.order_by(Gig.date).limit(4).all()
-    print("DEBUG – načteno koncertů:", len(gigs))  # <- tohle je důležité!
+    today = date.today()
+    gigs = (
+        Gig.query
+        .filter(Gig.date >= today)
+        .order_by(Gig.date.asc())
+        .limit(5)
+        .all()
+    )
     return render_template("main/index.html", gigs=gigs)
+

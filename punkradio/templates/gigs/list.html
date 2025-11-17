@@ -17,9 +17,10 @@
             🎸 {{ gig.lineup | join(' | ') if gig.lineup else "Neznámá kapela" }}
           </p>
           
-          <p class="text-secondary" style="font-size: 1rem;">
-            📍 {{ gig.city or "Neznámé město" }}{% if gig.venue %} – {{ gig.venue }}{% endif %}
+          <p class="text-secondary">
+          📍 {{ gig.city or "Neznámé město" }}{% if gig.venue %} – {{ gig.venue }}{% endif %}
           </p>
+
         </div>
       {% endfor %}
     </div>

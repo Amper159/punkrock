@@ -1,42 +1,38 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% block title %}Punkrock rádio{% endblock %}</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>::selection{background:#b91c1c;color:#fff}</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Punkrock 77 - Domov punkové scény{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-<!-- Spotify přehrávač v černém boxu -->
-<div style="position: fixed; bottom: 20px; right: 20px; width: 300px; z-index: 1000; background-color: #000; border-radius: 12px; padding: 4px;">
-  <iframe style="border-radius:12px"
-    src="https://open.spotify.com/embed/playlist/37i9dQZF1E38ank8LDzpQr?utm_source=generator"
-    width="100%" height="80" frameborder="0" allowfullscreen=""
-    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-    loading="lazy">
-  </iframe>
-</div>
 
-<body class="bg-neutral-950 text-neutral-100">
-<header class="sticky top-0 z-40 backdrop-blur border-b border-neutral-800 bg-neutral-950/80">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-    <a href="/" class="font-black text-lg text-red-600">Punkrock&nbsp;rádio</a>
-    <nav class="hidden md:flex gap-6 text-sm">
-      <a href="/novinky" class="hover:underline hover:text-red-500">Novinky</a>
-      <a href="/kapely" class="hover:underline hover:text-red-500">Kapely</a>
-      <a href="/koncerty" class="hover:underline hover:text-red-500">Koncerty</a>
-      <a href="/galerie" class="hover:underline hover:text-red-500">Galerie</a>
-      <a href="/komunita" class="hover:underline hover:text-red-500">Komunita</a>
-     <a href="/kontakt" class="hover:underline hover:text-red-500">Kontakt</a>  
-    </nav>
-  </div>
-</header>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <h1>
+              <a href="{{ url_for('main.index') }}" class="home-link">Punkrock 77</a>
+            </h1>
+        </div>
+        <nav class="navbar">
+            <a href="{{ url_for('news.list_news') }}" class="{% if request.endpoint.startswith('news.') %}active{% endif %}">Novinky</a>
+            <a href="{{ url_for('bands.list_bands') }}" class="{% if request.endpoint.startswith('bands.') %}active{% endif %}">Kapely</a>
+            <a href="{{ url_for('gigs.gigs_list') }}" class="{% if request.endpoint.startswith('gigs.') %}active{% endif %}">Koncerty</a>
+            <a href="{{ url_for('gallery.gallery_index') }}" class="{% if request.endpoint.startswith('gallery.') %}active{% endif %}">Galerie</a>
+            <a href="{{ url_for('komunita_bp.komunita') }}" class="{% if request.endpoint.startswith('komunita_bp.') %}active{% endif %}">Komunita</a>
+            <a href="{{ url_for('kontakt.index') }}" class="{% if request.endpoint.startswith('kontakt.') %}active{% endif %}">Kontakt</a>
+        </nav>
+    </header>
 
-<main class="min-h-[60vh]">{% block content %}{% endblock %}</main>
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
 
-<footer class="border-t border-neutral-800 py-10 text-center text-sm text-neutral-400">
-  © {{ today.year }} Punkrock rádio • Všechna práva vyřvána.
-</footer>
+    <footer class="site-footer">
+        <p>© 2025 Punkrock Rádio — Hudba, která nespí 🤘</p>
+    </footer>
 </body>
 </html>

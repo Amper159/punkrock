@@ -1,57 +1,49 @@
 {% extends "base.html" %}
-{% block title %}Punkrock rádio — Domů{% endblock %}
+{% block title %}Punkrock 77 - Domov punkové scény{% endblock %}
+
 {% block content %}
-
-<section class="text-center py-16 px-4">
-  <h1 class="text-4xl md:text-6xl font-black">Česká punková scéna na jednom místě.</h1>
-  <p class="mt-4 max-w-2xl mx-auto text-neutral-300">Novinky, kapely, koncerty, fotky a DIY komunita.</p>
-  <p class="mt-10 text-lg text-neutral-300 max-w-2xl mx-auto leading-relaxed">
-    Máš kapelu, ale zatím se o vás moc neví?
-    <span class="block text-red-400 font-semibold mt-1">
-      Napiš nám a my tě dáme na úvodní stránku — uvidí vás všichni, co půjdou kolem!
-    </span>
+<section class="hero">
+  <h1> Vítej na Punkrock 77 </h1>
+  <p>
+    Tohle není žádný sterilní hudební portál.  
+    Tohle je místo, kde <strong>punk ještě žije</strong> — bez cenzury, bez pozlátek, bez kalkulů.  
+    Sleduj koncerty, objevuj kapely a drž scénu při životě.  
   </p>
-  <div class="mt-6">
-    <a href="/kapely/pridat" class="inline-block px-5 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-neutral-100 font-semibold">Napiš nám</a>
-  </div>
+  <p>
+    Každý týden přinášíme <strong>nejnovější punkové akce</strong> z klubů po celé republice.  
+    Ať už jsi z Brna, Ostravy, nebo z nejzapadlejší vesnice – punk tě najde.
+  </p>
 </section>
 
-<section id="news" class="max-w-7xl mx-auto px-4 py-8">
-  <h2 class="text-2xl font-extrabold mb-4 text-red-500">Novinky</h2>
-  <div class="grid md:grid-cols-3 gap-5">
-    {% for n in news %}
-    <article class="border border-red-700 rounded-2xl p-5 bg-red-900/20">
-      <div class="text-xs text-neutral-400">{{ n.published_at.strftime('%Y-%m-%d') if n.published_at else '' }}</div>
-      <h3 class="text-lg font-bold mt-1">{{ n.title }}</h3>
-      <p class="text-sm text-neutral-300">{{ n.excerpt }}</p>
-      <div class="mt-4 text-right">
-        <a class="text-sm underline underline-offset-4 text-red-400 hover:text-red-300 hover:no-underline"
-           href="/novinky/{{ n.slug }}">Číst dál…</a>
+<section class="concerts-preview">
+  <h2>🎤 Nejbližší koncerty</h2>
+
+  {% if gigs %}
+    {% for gig in gigs %}
+      <div class="concert-card">
+        <div class="date">📅 {{ gig.date.strftime('%d.%m.%Y') }}</div>
+        <h3>🎸 {{ gig.lineup|join(' | ') }}</h3>
+        <p class="city">📍 {{ gig.city }} – {{ gig.venue }}</p>
       </div>
-    </article>
-    {% else %}
-    <p class="text-neutral-400">Zítra startujeme!
-        Přidáváme kapely, koncerty i špínu z garáží.
-        Punk žije — a my to tady rozjedem naplno!.</p>
     {% endfor %}
+  {% else %}
+    <p>Momentálně nejsou žádné plánované koncerty.</p>
+  {% endif %}
+
+  <div class="more-concerts">
+    <a href="{{ url_for('gigs.gigs_list') }}" class="button">Zobrazit všechny koncerty →</a>
   </div>
 </section>
 
-<section id="gigs" class="max-w-7xl mx-auto px-4 py-8">
-  <h2 class="text-2xl font-extrabold mb-4 text-red-500">Nejbližší koncerty</h2>
-  <ul class="space-y-4">
-    {% for g in gigs %}
-    <li class="border border-red-700 rounded-2xl p-5 bg-red-900/20">
-      <strong>{{ g.date.strftime('%d.%m.%Y') }}</strong> – {{ g.city }}, {{ g.venue }}{% if g.lineup %}: {{ ' · '.join(g.lineup) }}{% endif %}
-    </li>
-    {% else %}
-    <p class="text-neutral-400">Zatím žádné nadcházející koncerty.</p>
-    {% endfor %}
-  </ul>
+<section class="about">
+  <h2>💬 O nás</h2>
+  <p>
+    Punkrock 77 vznikl z lásky ke klubům, kapelám a fanouškům, kteří to pořád cítí.  
+    Žádná reklama, žádné algoritmy – jen <strong>čistá energie scény</strong>.
+  </p>
+  <p>
+    Chceš, aby se tvá kapela nebo koncert objevil tady?  
+    Napiš nám přes <a href="{{ url_for('kontakt.index') }}">kontakt</a> a ozveme se ti.  
+  </p>
 </section>
-{% for c in concerts %}
-  <p>{{ c.band }} - {{ c.date }} - {{ c.venue }}</p>
-{% endfor %}
-
-
 {% endblock %}

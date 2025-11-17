@@ -12,7 +12,8 @@
     "Hudba"
   ],
   "date": "2025-11-12",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/53129-koncert-novojicinskych-chuliganu-obecni-urad-senov-u-noveho-jicina-preplesk-facan-ufons",
@@ -26,7 +27,8 @@
     "Hudba"
   ],
   "date": "2025-11-15",
-  "city": ""
+  "city": "Šenov u Nového Jičína",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/57262-plexisovjanka-v-rock-cafe-prague-rock-cafe-praha-just-war",
@@ -40,7 +42,8 @@
     "Hudba"
   ],
   "date": "2025-11-27",
-  "city": ""
+  "city": "Praha",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/57636-elektrick-mann-nikola-mucha-vagon-klub-praha",
@@ -55,7 +58,8 @@
     "Hudba"
   ],
   "date": "2025-11-08",
-  "city": ""
+  "city": "Praha",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/57638-elektrick-mann-nikola-mucha-metro-music-bar-brno",
@@ -70,7 +74,8 @@
     "Hudba"
   ],
   "date": "2025-11-14",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/57977-pestalozzi-andel-music-bar-andel-music-bar-plzen",
@@ -85,7 +90,8 @@
     "Hudba"
   ],
   "date": "2025-11-08",
-  "city": ""
+  "city": "Plzeň",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/58360-punkplugged-festival-vol-4-letni-parket-ujezd-u-prelouce-poletime-zakazanyovoce-sps",
@@ -99,7 +105,8 @@
     "Hudba"
   ],
   "date": "2026-06-12",
-  "city": ""
+  "city": "Újezd u Přelouče",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/58538-drevorockfest-2026-zamecka-zahrada-drevohostice",
@@ -115,7 +122,8 @@
     "Hudba"
   ],
   "date": "2026-07-05",
-  "city": ""
+  "city": "Dřevohostice",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/58944-jolly-joker-and-the-pb-of-the-universe-ruznorohy-alternativni-klub-tyjatr-svitavy",
@@ -130,7 +138,8 @@
     "Hudba"
   ],
   "date": "2025-11-29",
-  "city": ""
+  "city": "Svitavy",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/58998-sinks-kosmetik-institut-klub-alterna-brno",
@@ -146,7 +155,8 @@
     "Hudba"
   ],
   "date": "2025-12-13",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59225-talkshow-s-laskou-kuba-ryba-raego-maja-rose-kongresove-centrum-prachatice-laska-raego",
@@ -158,7 +168,8 @@
     "Stand-up / Talk show"
   ],
   "date": "2025-11-11",
-  "city": ""
+  "city": "Prachatice",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59229-ctib-taskent-klub-alterna-brno",
@@ -174,7 +185,8 @@
     "Hudba"
   ],
   "date": "2025-11-06",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59321-latex-party-brno-5-prvni-patro-brno",
@@ -188,7 +200,8 @@
     "Umění"
   ],
   "date": "2025-11-08",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/58343-sto-zvirat-tricet-pet-fleda-brno",
@@ -203,7 +216,8 @@
     "Hudba"
   ],
   "date": "2025-11-29",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59476-visaci-zamek-klub-mir-uherske-hradiste",
@@ -217,7 +231,8 @@
     "Hudba"
   ],
   "date": "2025-12-05",
-  "city": ""
+  "city": "Uherské Hradiště",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59492-krasny-volant-fest-2025-aneb-30-let-abc-klub-pardubice-the-fialky-punk-floid",
@@ -232,7 +247,8 @@
     "Hudba"
   ],
   "date": "2025-11-15",
-  "city": ""
+  "city": "Pardubice",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59518-vecer-s-pisnickou-sokolovna-porici-nad-sazavou-rv-4-halali-aggressive-tyrants",
@@ -247,7 +263,8 @@
     "Hudba"
   ],
   "date": "2025-11-29",
-  "city": ""
+  "city": "Poříčí nad Sázavou",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59641-christina-mantis-island-mint-klub-alterna-brno",
@@ -263,7 +280,8 @@
     "Hudba"
   ],
   "date": "2025-11-21",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59833-ginger-wizard-the-peter-jacksons-andy-aquarius-kafara-brno",
@@ -281,7 +299,8 @@
     "Hudba"
   ],
   "date": "2025-12-06",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60045-soty-rock-fest-666-areal-olse-cervenka-na-vlastni-nebezpeci-hazydecay-iron-maiden-moravia",
@@ -295,7 +314,8 @@
     "Hudba"
   ],
   "date": "2026-06-06",
-  "city": ""
+  "city": "Červenka",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60330-davova-psychoza-tour-2025-v-auto-da-fe-auto-da-fe-kladno",
@@ -309,7 +329,8 @@
     "Hudba"
   ],
   "date": "2025-11-15",
-  "city": ""
+  "city": "Kladno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60429-vrata-hosek-starti-prisun-povolen-mlada-boleslav-willax-klub-heineken-mlada-boleslav",
@@ -324,7 +345,8 @@
     "Hudba"
   ],
   "date": "2025-12-06",
-  "city": ""
+  "city": "Mladá Boleslav",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60428-vrata-hosek-starti-zadny-problem-jindrichuv-hradec-lucky-pery-jindrichuv-hradec",
@@ -339,7 +361,8 @@
     "Hudba"
   ],
   "date": "2025-12-13",
-  "city": ""
+  "city": "Jindřichův Hradec",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60515-znouzectnost-alternativni-klub-tyjatr-svitavy",
@@ -353,7 +376,8 @@
     "Hudba"
   ],
   "date": "2026-02-13",
-  "city": ""
+  "city": "Svitavy",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60476-mutanti-hledaj-vychodisko-mmnk-prostor-pansky-dvur-boskovice",
@@ -368,7 +392,8 @@
     "Hudba"
   ],
   "date": "2025-11-07",
-  "city": ""
+  "city": "Boskovice",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60447-buzzcocks-uk-fleda-brno",
@@ -382,7 +407,8 @@
     "Hudba"
   ],
   "date": "2026-02-27",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60632-franc-alpa-15-let-zelenacova-sopa-zlin",
@@ -397,7 +423,8 @@
     "Hudba"
   ],
   "date": "2025-12-06",
-  "city": ""
+  "city": "Zlín",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60061-dukla-anki-media-service-fleda-brno",
@@ -411,7 +438,8 @@
     "Hudba"
   ],
   "date": "2025-12-03",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60837-trinact-neboztiku-kultura-bela-komorni-sal-bela-pod-bezdezem",
@@ -425,7 +453,8 @@
     "Představení"
   ],
   "date": "2025-11-14",
-  "city": ""
+  "city": "Bělá pod Bezdězem",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60853-yasha-96-rondevou-klub-alterna-brno",
@@ -440,7 +469,8 @@
     "Hudba"
   ],
   "date": "2025-11-14",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60987-kill-the-dandies-dead-dog-legacy-dock-ostrava-ostrava",
@@ -456,7 +486,8 @@
     "Hudba"
   ],
   "date": "2025-11-15",
-  "city": ""
+  "city": "Ostrava",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61008-davova-psychoza-tour-2025-hellpaso-music-club-olomouc",
@@ -471,7 +502,8 @@
     "Hudba"
   ],
   "date": "2025-11-08",
-  "city": ""
+  "city": "Olomouc",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61078-zimni-utulek-fest-2025-baronka-litomerice-die-ukrainiens-vibes-freaky-suicide",
@@ -488,7 +520,8 @@
     "Hudba"
   ],
   "date": "2025-11-07",
-  "city": ""
+  "city": "Litoměřice",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61099-zimni-utulek-fest-2025-biograffs-club-decin-die-ukrainiens-freaky-suicide-aso-naga",
@@ -504,7 +537,8 @@
     "Hudba"
   ],
   "date": "2025-11-08",
-  "city": ""
+  "city": "Děčín",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61207-e-e-a-vision-days-club-na-rampe-marianske-lazne",
@@ -518,7 +552,8 @@
     "Hudba"
   ],
   "date": "2025-12-05",
-  "city": ""
+  "city": "Mariánské Lázně",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61259-ventolin-ctib-gogo-klub-znojmo",
@@ -534,7 +569,8 @@
     "Hudba"
   ],
   "date": "2025-12-19",
-  "city": ""
+  "city": "Znojmo",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61325-zuby-nehty-kastan-scena-unijazzu-praha",
@@ -550,7 +586,8 @@
     "Hudba"
   ],
   "date": "2025-11-20",
-  "city": ""
+  "city": "Praha",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61453-klara-vytiskova-vega-tour-andel-music-bar-plzen",
@@ -566,7 +603,8 @@
     "Hudba"
   ],
   "date": "2025-11-19",
-  "city": ""
+  "city": "Plzeň",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61616-tragedi-nacucky-olomouc",
@@ -580,7 +618,8 @@
     "Představení"
   ],
   "date": "2025-11-19",
-  "city": ""
+  "city": "Olomouc",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61613-klara-vytiskova-s-kapelou-dundee-jam-kladno",
@@ -598,7 +637,8 @@
     "Hudba"
   ],
   "date": "2025-11-26",
-  "city": ""
+  "city": "Kladno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61679-znouzecnost-musilka-brno-znouzectnost",
@@ -613,7 +653,8 @@
     "Hudba"
   ],
   "date": "2025-12-18",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61739-%D0%B0%D0%B4%D0%B0%D0%BF%D1%82%D0%B0%D1%86%D0%B8%D1%8F-%D0%B1%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B8-%D1%81%D0%BE%D0%BB%D1%8C%D0%BD%D1%8B%D0%B8-%D0%BA%D0%BE%D0%BD%D1%86%D0%B5%D1%80%D1%82-vagon-klub-praha",
@@ -628,7 +669,8 @@
     "Hudba"
   ],
   "date": "2025-11-12",
-  "city": ""
+  "city": "Praha",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61908-civilni-obrana-v-hajecku-hajecek-letni-parket-hermanicky",
@@ -644,7 +686,8 @@
     "Tanec"
   ],
   "date": "2026-08-29",
-  "city": ""
+  "city": "Heřmaničky",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61921-brnenecfest-xxv-aneb-punkovej-klystyr-brnenec-brnenec-los-fastidios-visaci-zamek-totalni-nasazeni",
@@ -658,7 +701,8 @@
     "Hudba"
   ],
   "date": "2026-07-04",
-  "city": ""
+  "city": "Brněnec",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60336-chorobopop-kochlea-kafara-brno",
@@ -676,7 +720,8 @@
     "Hudba"
   ],
   "date": "2025-11-28",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61732-www-neurobeat-vlasta-dusan-tomanek-pole-designu-egoe-bilovice",
@@ -688,7 +733,8 @@
     "Hudba"
   ],
   "date": "2025-11-08",
-  "city": ""
+  "city": "Bílovice",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62054-vision-days-a-e-e-pub-bar-mlynice-jesenik",
@@ -702,7 +748,8 @@
     "Hudba"
   ],
   "date": "2026-03-27",
-  "city": ""
+  "city": "Jeseník",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62101-mnaga-a-zdorp-slobodna-europa-delnicky-dum-blansko",
@@ -716,7 +763,8 @@
     "Hudba"
   ],
   "date": "2026-04-18",
-  "city": ""
+  "city": "Blansko",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62105-uz-jsme-doma-klub-mir-uherske-hradiste",
@@ -730,7 +778,8 @@
     "Hudba"
   ],
   "date": "2026-03-20",
-  "city": ""
+  "city": "Uherské Hradiště",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/61696-houba-volant-veseli-konici-dukla-vozovna-harrachov-sklarska-chalupa-harrachov-houba-volant",
@@ -744,7 +793,8 @@
     "Hudba"
   ],
   "date": "2026-02-20",
-  "city": ""
+  "city": "Harrachov",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62094-karlo-fvck_kvlt-fleda-brno",
@@ -758,7 +808,8 @@
     "Hudba"
   ],
   "date": "2025-12-19",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/60679-punkovy-vanoce-hudebni-klub-lucie-hradec-kralove-the-fialky-vision-days-bratislavske-dievcata",
@@ -773,7 +824,8 @@
     "Advent / Vánoce"
   ],
   "date": "2025-12-20",
-  "city": ""
+  "city": "Hradec Králové",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62166-dirty-blondes-queens-of-everything-artbar-artbar-brno",
@@ -787,7 +839,8 @@
     "Hudba"
   ],
   "date": "2025-12-06",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/59561-zive-kvety-terrible-2s-stara-pekarna-brno",
@@ -802,7 +855,8 @@
     "Hudba"
   ],
   "date": "2025-12-17",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62045-dusickovy-koncert-club-kino-cernosice",
@@ -817,7 +871,8 @@
     "Umění"
   ],
   "date": "2025-11-08",
-  "city": ""
+  "city": "Černošice",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62257-wotaznik-sticx-v-andelu-plzen-andel-music-bar-plzen",
@@ -832,7 +887,8 @@
     "Hudba"
   ],
   "date": "2025-11-15",
-  "city": ""
+  "city": "Plzeň",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62330-uz-jsme-doma-na-vecnosti-klub-na-vecnosti-znojmo",
@@ -847,7 +903,8 @@
     "Hudba"
   ],
   "date": "2025-12-12",
-  "city": ""
+  "city": "Znojmo",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62333-mucha-pochcala-musica-klub-mir-uherske-hradiste",
@@ -861,7 +918,8 @@
     "Hudba"
   ],
   "date": "2026-01-09",
-  "city": ""
+  "city": "Uherské Hradiště",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62313-narvan-a-nasrot-klub-mir-uherske-hradiste",
@@ -875,7 +933,8 @@
     "Hudba"
   ],
   "date": "2026-05-15",
-  "city": ""
+  "city": "Uherské Hradiště",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62316-tragedi-nacucky-olomouc",
@@ -889,7 +948,8 @@
     "Představení"
   ],
   "date": "2025-12-16",
-  "city": ""
+  "city": "Olomouc",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62359-301-zrcadla-ornament-brno-sibir-28-11-sibir-brno-301-zrcadla-ornament",
@@ -903,7 +963,8 @@
     "Hudba"
   ],
   "date": "2025-11-28",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62423-vintage-wine-foggy-dude-kalsarikannit-v-hradci-kralove-ac-klub-hradec-kralove",
@@ -917,7 +978,8 @@
     "Hudba"
   ],
   "date": "2025-11-07",
-  "city": ""
+  "city": "Hradec Králové",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62431-bedna-bilbo-klub-alterna-brno",
@@ -932,7 +994,8 @@
     "Hudba"
   ],
   "date": "2025-11-20",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62426-vintage-wine-foggy-dude-kalsarikannit-the-onion-rings-unleaded-coffee-brno",
@@ -946,7 +1009,8 @@
     "Hudba"
   ],
   "date": "2025-11-28",
-  "city": ""
+  "city": "Brno",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62497-horkyze-slize-serikovka-plzen-plzen",
@@ -960,7 +1024,8 @@
     "Hudba"
   ],
   "date": "2025-11-06",
-  "city": ""
+  "city": "Plzeň",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62647-nixies-ragdoll-the-tails-piksla-breclav",
@@ -976,7 +1041,8 @@
     "Hudba"
   ],
   "date": "2025-11-07",
-  "city": ""
+  "city": "Břeclav",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62726-znouzectnost-ctib-klub-mir-uherske-hradiste",
@@ -991,7 +1057,8 @@
     "Hudba"
   ],
   "date": "2026-02-27",
-  "city": ""
+  "city": "Uherské Hradiště",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62779-transmission-the-sound-of-joy-division-uk-kastan-scena-unijazzu-praha",
@@ -1005,7 +1072,8 @@
     "Hudba"
   ],
   "date": "2026-01-20",
-  "city": ""
+  "city": "Praha",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62758-na-strelaku-vivian-coubey-kluci-bez-sance-kd-strelnice-broumov-vivian-coubey-kluci",
@@ -1023,7 +1091,8 @@
     "Hudba"
   ],
   "date": "2025-12-27",
-  "city": ""
+  "city": "Broumov",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62265-znouzectnost-v-mc-panteon-music-club-panteon-konstantinovy-lazne",
@@ -1037,7 +1106,8 @@
     "Hudba"
   ],
   "date": "2026-01-17",
-  "city": ""
+  "city": "Konstantinovy Lázně",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62979-haze-in-the-afternoon-hihead-headless-princess-kastan-scena-unijazzu-praha-hihead",
@@ -1052,7 +1122,8 @@
     "Hudba"
   ],
   "date": "2025-12-13",
-  "city": ""
+  "city": "Praha",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/63028-benjaming-s-clan-kowalski-alternativni-klub-tyjatr-svitavy",
@@ -1067,7 +1138,8 @@
     "Hudba"
   ],
   "date": "2026-03-21",
-  "city": ""
+  "city": "Svitavy",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62074-neco-jako-punk-do-police-zamek-police-police",
@@ -1083,7 +1155,8 @@
     "Hudba"
   ],
   "date": "2026-06-05",
-  "city": ""
+  "city": "Police",
+  "venue": ""
 },
 {
   "booking_url": "https://www.smsticket.cz/vstupenky/62353-ventolin-na-macku-klub-macko-karlovy-vary",
@@ -1098,7 +1171,8 @@
     "Hudba"
   ],
   "date": "2025-12-06",
-  "city": ""
+  "city": "Karlovy Vary",
+  "venue": ""
 }
   ],
   "total_count": 74

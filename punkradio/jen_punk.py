@@ -125,7 +125,22 @@ class PunkRockFilter:
                         "genres": self.extract_genres(event),
                         "themes": self.extract_theme_names(event),
                         "date": event.get("dates", {}).get("start_date", ""),
-                        "city": event.get("venue", {}).get("city", "")
+                        "city": (
+                        event.get("city")
+                        or event.get("city_name")
+                        or event.get("place", {}).get("city")
+                        or event.get("venue", {}).get("city")
+                        or event.get("location", {}).get("city")
+                        or ""
+                        ),
+                        "venue": (
+                            event.get("venue")
+                            or event.get("venue_name")
+                            or event.get("place", {}).get("name")
+                            or event.get("location", {}).get("venue")
+                            or ""
+                        )
+
                     }, outfile, ensure_ascii=False, indent=2)
 
                 if self.total_events % 2000 == 0:

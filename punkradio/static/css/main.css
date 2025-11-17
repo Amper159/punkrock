@@ -1,0 +1,234 @@
+/* ===== 🎸 Punkrock Rádio – temně punkový styl ===== */
+
+:root {
+  --black: #0b0b0b;          /* o trochu světlejší černá, víc "prachová" */
+  --red: #a31e1e;            /* temnější červená s teplým nádechem */
+  --dark-red: #551111;       /* hluboké vínové tóny */
+  --gray: #c5c5c5;           /* neutrální světle šedá */
+  --light-gray: #dedede;     /* jemnější bílá */
+  --font-main: 'Rubik', sans-serif;
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--black);
+  color: var(--light-gray);
+  font-family: var(--font-main);
+  line-height: 1.6;
+}
+
+/* ===== Header ===== */
+.site-header {
+  background: linear-gradient(90deg, #180808 0%, #2a0c0c 100%);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--dark-red);
+}
+
+
+.site-header .logo a {
+  color: var(--red);
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.site-header .logo a:hover {
+  color: white;
+  text-shadow: 0 0 15px var(--red);
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--gray);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  background: var(--red);
+  color: white;
+}
+
+.navbar a.active {
+  background: var(--dark-red);
+  color: white;
+}
+
+/* ===== Content ===== */
+.main-content {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+/* ===== Koncerty / boxy ===== */
+.concert-card {
+  background: #120808;                /* méně kontrastní, hřejivější černá */
+  border: 1px solid var(--dark-red);
+  border-radius: 12px;
+  padding: 25px;
+  margin: 25px auto;
+  text-align: left;
+  max-width: 700px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(163, 30, 30, 0.15); /* slabší glow */
+}
+
+.concert-card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(163, 30, 30, 0.25);
+}
+
+
+.concert-card h3 {
+  color: var(--red);
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.concert-card .date {
+  color: var(--light-gray);
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.concert-card .city {
+  color: var(--gray);
+  font-style: italic;
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  background: #1a0000;
+  color: #aaa;
+  text-align: center;
+  padding: 25px 10px;
+  margin-top: 50px;
+  border-top: 2px solid var(--dark-red);
+}
+
+.site-footer p {
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Responsivita ===== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .site-header {
+    text-align: center;
+  }
+
+  .concert-card {
+    padding: 20px;
+  }
+}
+/* ===== Hero sekce ===== */
+.hero {
+  text-align: center;
+  margin-bottom: 60px;
+  background: radial-gradient(circle at top, #220000 0%, #0a0a0a 70%);
+  padding: 40px 20px;
+  border-bottom: 2px solid var(--dark-red);
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  color: var(--red);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero p {
+  max-width: 800px;
+  margin: 10px auto;
+  font-size: 1.05rem;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* ===== Tlačítko „více koncertů“ ===== */
+.more-concerts {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.button {
+  background: var(--dark-red);
+  color: var(--light-gray);
+  padding: 12px 25px;
+  border-radius: 6px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  background: var(--red);
+  color: white;
+  box-shadow: 0 0 10px rgba(163, 30, 30, 0.3);
+}
+
+/* ===== Sekce „o nás“ ===== */
+.about {
+  margin-top: 80px;
+  padding: 40px 20px;
+  background: #111;
+  border-top: 2px solid var(--dark-red);
+  border-radius: 8px;
+}
+
+.about h2 {
+  color: var(--red);
+  margin-bottom: 15px;
+}
+
+.about p {
+  color: var(--gray);
+  max-width: 850px;
+  margin: 10px auto;
+  line-height: 1.7;
+}
+
+.about a {
+  color: var(--red);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.about a:hover {
+  text-decoration: underline;
+}
