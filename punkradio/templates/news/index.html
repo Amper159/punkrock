@@ -1,36 +1,35 @@
 {% extends "base.html" %}
-{% block title %}Novinky — Punkrock rádio{% endblock %}
+{% block title %}Novinky{% endblock %}
+
 {% block content %}
-<section class="max-w-7xl mx-auto px-4 py-12">
-  <h1 class="text-3xl font-extrabold mb-6">Novinky</h1>
-  <div class="grid md:grid-cols-3 gap-5">
-    {% for n in items %}
-    <article class="border border-red-700 rounded-2xl p-5 bg-red-900/20">
-      <div class="text-xs text-neutral-400">{{ n.published_at.strftime('%Y-%m-%d') if n.published_at else '' }}</div>
-      <h3 class="text-lg font-bold mt-1">{{ n.title }}</h3>
-      <p class="text-sm text-neutral-300">{{ n.excerpt }}</p>
-      <div class="mt-3 text-right">
-        <a class="text-sm underline underline-offset-4 text-red-400 hover:text-red-300" href="/novinky/{{ n.slug }}">Číst dál…</a>
-      </div>
-    </article>
+<section class="news-section">
+  <h1 class="text-center">Punkové novinky</h1>
+
+  <div class="news-list">
+    {% for article in articles %}
+      <article class="news-item">
+        <h2>
+          <a href="{{ url_for('news.detail', slug=article.slug) }}">
+            {{ article.title }}
+          </a>
+        </h2>
+
+        <p class="meta">
+          Publikováno: {{ article.published_at.strftime('%d.%m.%Y') }}
+          {% if article.band %} | Kapela: <strong>{{ article.band }}</strong>{% endif %}
+        </p>
+
+        {% if article.perex %}
+          <p class="perex">{{ article.perex }}</p>
+        {% endif %}
+
+        <a href="{{ url_for('news.detail', slug=article.slug) }}" class="btn btn-read">
+          Číst dál →
+        </a>
+      </article>
     {% else %}
-    <p class="text-neutral-400">Od zítra začínáme a bude to jízda.</p>
-
+      <p class="text-center">Zatím žádné novinky 😢</p>
     {% endfor %}
   </div>
 </section>
-<section id="gigs" class="max-w-7xl mx-auto px-4 py-8">
-  <h2 class="text-2xl font-extrabold mb-4 text-red-500">Nejbližší koncerty</h2>
-  <ul class="space-y-4">
-    {% for gig in concerts %}
-    <li class="border border-red-700 rounded-2xl p-5 bg-red-900/20">
-      <strong>{{ gig.date }}</strong> – {{ gig.city }}, {{ gig.venue }}: {{ gig.bands }}
-    </li>
-    {% endfor %}
-  </ul>
-  <div class="text-right mt-6">
-    <a href="/koncerty" class="text-red-400 underline hover:text-red-300">Zobrazit všechny koncerty →</a>
-  </div>
-</section>
-
 {% endblock %}

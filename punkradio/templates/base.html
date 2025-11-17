@@ -20,8 +20,7 @@
         <nav class="navbar">
             <a href="{{ url_for('news.list_news') }}" class="{% if request.endpoint.startswith('news.') %}active{% endif %}">Novinky</a>
             <a href="{{ url_for('bands.list_bands') }}" class="{% if request.endpoint.startswith('bands.') %}active{% endif %}">Kapely</a>
-            <a href="{{ url_for('gigs.gigs_list') }}" class="{% if request.endpoint.startswith('gigs.') %}active{% endif %}">Koncerty</a>
-            <a href="{{ url_for('gallery.gallery_index') }}" class="{% if request.endpoint.startswith('gallery.') %}active{% endif %}">Galerie</a>
+            <a href="{{ url_for('gigs.gigs_list') }}" class="{% if request.endpoint.startswith('gigs.') %}active{% endif %}">Koncerty</a> 
             <a href="{{ url_for('komunita_bp.komunita') }}" class="{% if request.endpoint.startswith('komunita_bp.') %}active{% endif %}">Komunita</a>
             <a href="{{ url_for('kontakt.index') }}" class="{% if request.endpoint.startswith('kontakt.') %}active{% endif %}">Kontakt</a>
         </nav>

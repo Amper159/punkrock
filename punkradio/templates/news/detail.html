@@ -1,12 +1,23 @@
 {% extends "base.html" %}
-{% block title %}{{ item.title }} — Novinka{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
+
 {% block content %}
-<section class="max-w-3xl mx-auto px-4 py-12">
-  <div class="text-xs text-neutral-400">{{ item.published_at.strftime('%Y-%m-%d') if item.published_at else '' }}</div>
-  <h1 class="text-3xl font-extrabold mt-1">{{ item.title }}</h1>
-  <article class="prose prose-invert mt-6 max-w-none">{{ item.body | safe }}</article>
-  <div class="mt-8">
-    <a href="/novinky" class="underline underline-offset-4 text-red-400 hover:text-red-300">← Zpět na novinky</a>
+<section class="news-detail">
+  <h1>{{ article.title }}</h1>
+
+  <p class="meta">
+    Publikováno: {{ article.published_at.strftime('%d.%m.%Y') }}
+    {% if article.band %} | Kapela: <strong>{{ article.band }}</strong>{% endif %}
+  </p>
+
+  <article class="content">
+    {{ article.content | safe }}
+  </article>
+
+  <div class="back-link">
+    <a href="{{ url_for('news.list_news') }}" class="btn btn-back">
+      ← Zpět na novinky
+    </a>
   </div>
 </section>
 {% endblock %}

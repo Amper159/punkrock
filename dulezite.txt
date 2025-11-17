@@ -1,0 +1,4 @@
+# potřebný příkaz ke spuštění a aktualizaci koncertu
+python import_punk_gigs.py
+# načítání novinek
+python punkradio/seed_news.py

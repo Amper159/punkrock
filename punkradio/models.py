@@ -24,6 +24,8 @@ class Article(db.Model):
     slug = db.Column(db.String(160), unique=True, nullable=False, index=True)
     title = db.Column(db.String(200), nullable=False)
     band = db.Column(db.String(120))
+    perex = db.Column(db.String(500)) 
+    content = db.Column(db.Text, nullable=False)
     excerpt = db.Column(db.Text)
     body = db.Column(db.Text)
     tags = db.Column(db.JSON)
