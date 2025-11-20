@@ -1,9 +1,33 @@
 {% extends "base.html" %}
-
 {% block content %}
-  <div class="max-w-3xl mx-auto py-16 px-4 text-center">
-    <h1 class="text-3xl font-black text-red-600 mb-6">Kontakt</h1>
-    <p class="text-neutral-300 mb-4">Chceš se nám ozvat, přidat kapelu nebo nahlásit koncert?</p>
-    <p class="text-neutral-300">Pošli e-mail na <a href="mailto:punk@radio.cz" class="text-red-500 underline">punk@radio.cz</a></p>
+
+<section class="contact-section">
+  <div class="contact-header">
+    <h1 class="punk-heading"> Kontakt</h1>
+    <p class="intro-text">
+      Máš kapelu, chceš přidat koncert, nebo se chceš zapojit do punkové komunity?
+      Ozvi se nám – punx helping punx!
+    </p>
   </div>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>📬 Kontaktuj nás</h2>
+      <p><strong>E-mail:</strong> <a href="mailto:info@punkradio.cz">info@punkradio.cz</a></p>
+      <p><strong>Discord:</strong> <a href="https://discord.gg/VCCnc9qu" target="_blank">Připoj se k diskuzi 🎧</a></p>
+    </div>
+
+    <div class="contact-form">
+      <h2>💬 Napiš nám zprávu</h2>
+      <form action="#" method="post" class="punk-form">
+        <input type="text" name="name" placeholder="Tvoje jméno" required>
+        <input type="email" name="email" placeholder="Tvůj e-mail" required>
+        <textarea name="message" placeholder="Zpráva..." rows="5" required></textarea>
+        <button type="submit">Odeslat</button>
+      </form>
+    </div>
+  </div>
+  
+</section>
+
 {% endblock %}

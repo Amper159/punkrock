@@ -1,24 +1,70 @@
 {% extends "base.html" %}
-{% block title %}Kapely — Punkrock rádio{% endblock %}
 {% block content %}
-<section class="max-w-7xl mx-auto px-4 py-12">
-  <div class="flex items-center justify-between">
-    <h1 class="text-3xl font-extrabold">Kapely</h1>
-    <a href="/kapely/pridat" class="px-3 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-neutral-100 text-sm font-semibold">Přidat kapelu</a>
+
+<section class="bands-section">
+  <h1 class="punk-heading"> Česká punková scéna</h1>
+  <p class="intro-text">
+    Český punk není jen hudba — je to způsob myšlení, životní postoj a upřímná energie.
+    Od kultovních legend až po novou vlnu rebelů, tahle scéna stále dýchá a tvoří.
+    <br><br>
+    Přinášíme výběr kapel, které utvářely (a stále tvoří) zvuk českého punku.
+  </p>
+
+  <div class="band-grid">
+    <!-- VISACÍ ZÁMEK -->
+    <div class="band-card">
+      <img src="{{ url_for('static', filename='img/bands/visaci_zamek.jpg') }}" alt="Visací zámek">
+      <h2>Visací zámek</h2>
+      <p>Nejstarší česká punková kapela, která nikdy nepřestala hrát.
+         Kult, nadhled a nesmrtelné hity jako <em>Známka punku</em> nebo <em>Traktor</em>.</p>
+    </div>
+
+    <!-- PLEXIS -->
+    <div class="band-card">
+      <img src="{{ url_for('static', filename='img/bands/plexis.jpg') }}" alt="Plexis">
+      <h2>Plexis</h2>
+      <p>Legenda pražské scény vedená Petrem Hoškem. 
+         Jejich jméno je synonymem pro autentický punk bez pozlátek.</p>
+    </div>
+
+    <!-- TOTÁLNÍ NASAZENÍ -->
+    <div class="band-card">
+      <img src="{{ url_for('static', filename='img/bands/tot_nasazeni.jpg') }}" alt="Totální nasazení">
+      <h2>Totální nasazení</h2>
+      <p>Slánská parta, která už od 90. let šíří pozitivní energii a
+         chytlavé punkrockové hymny s nadhledem i ironií.</p>
+    </div>
+
+    <!-- THE FIALKY -->
+    <div class="band-card">
+      <img src="{{ url_for('static', filename='img/bands/the_fialky.jpg') }}" alt="The Fialky">
+      <h2>The Fialky</h2>
+      <p>Moderní punk 77' v českém balení. Drzí, poctiví a vždy s jasným názorem.
+         Známí svými energickými koncerty a oldschool stylem.</p>
+    </div>
+
+    <!-- VISION DAYS -->
+    <div class="band-card">
+      <img src="{{ url_for('static', filename='img/bands/vision_days.jpg') }}" alt="Vision Days">
+      <h2>Vision Days</h2>
+      <p>Punkrock se srdcem i saxofonem. Vision Days spojují melodii s energií
+         a dokazují, že punk může být i pozitivní síla.</p>
+    </div>
+
+    <!-- TRAGEDIS -->
+    <div class="band-card">
+      <img src="{{ url_for('static', filename='img/bands/tragedis.jpg') }}" alt="Tragedis">
+      <h2>Tragedis</h2>
+      <p>Kapela z Jindřichova Hradce, která přináší poctivý punkrock s ostrými riffy
+         a přímočarými texty o životě, společnosti i vlastní cestě. 
+         Jejich koncerty jsou vždy plné energie a upřímnosti.</p>
+    </div>
   </div>
-  <div class="mt-6 grid md:grid-cols-2 gap-5">
-    {% for b in bands %}
-    <article class="border border-red-700 rounded-2xl p-5 bg-red-900/20">
-      <div class="flex items-center justify-between">
-        <h3 class="text-xl font-bold text-red-400">{{ b.name }}</h3>
-        {% if b.city %}<span class="px-2 py-1 rounded-full text-xs border border-red-700 text-red-400">{{ b.city }}</span>{% endif %}
-      </div>
-      <div class="mt-2 text-sm text-neutral-300">{{ b.about or '' }}</div>
-      {% if b.styles %}<div class="mt-2 text-xs text-neutral-400">{{ b.styles }}</div>{% endif %}
-    </article>
-    {% else %}
-    <p class="text-neutral-400">Zatím žádné schválené kapely.</p>
-    {% endfor %}
-  </div>
+
+  <p class="closing-text">
+    ⚡ Punk žije v klubech, v ulicích i v našich srdcích.  
+    Máš kapelu, která tu chybí? Pošli nám info a přidej se do téhle punkové rodiny!
+  </p>
 </section>
+
 {% endblock %}
