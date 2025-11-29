@@ -12,20 +12,26 @@
 
 <body>
     <header class="site-header">
-        <div class="logo">
-            <h1>
-              <a href="{{ url_for('main.index') }}" class="home-link">Punkrock 77</a>
-            </h1>
-        </div>
-        <nav class="navbar">
-            <a href="{{ url_for('news.list_news') }}" class="{% if request.endpoint.startswith('news.') %}active{% endif %}">Novinky</a>
-            <a href="{{ url_for('bands.list_bands') }}" class="{% if request.endpoint.startswith('bands.') %}active{% endif %}">Kapely</a>
-            <a href="{{ url_for('gigs.gigs_list') }}" class="{% if request.endpoint.startswith('gigs.') %}active{% endif %}">Koncerty</a> 
-            <a href="{{ url_for('komunita_bp.komunita') }}" class="{% if request.endpoint.startswith('komunita_bp.') %}active{% endif %}">Komunita</a>
-            <a href="{{ url_for('kontakt.index') }}" class="{% if request.endpoint.startswith('kontakt.') %}active{% endif %}">Kontakt</a>
-        </nav>
-    </header>
+    <div class="logo">
+        <h1>
+          <a href="{{ url_for('main.index') }}" class="home-link">Punkrock 77</a>
+        </h1>
+    </div>
 
+    <!-- HAMBURGER IKONA -->
+    <div class="hamburger" onclick="toggleMenu()">
+        ☰
+    </div>
+
+    <!-- NAVIGACE -->
+    <nav class="navbar" id="navMenu">
+        <a href="{{ url_for('news.list_news') }}" class="{% if request.endpoint.startswith('news.') %}active{% endif %}">Novinky</a>
+        <a href="{{ url_for('bands.list_bands') }}" class="{% if request.endpoint.startswith('bands.') %}active{% endif %}">Kapely</a>
+        <a href="{{ url_for('gigs.gigs_list') }}" class="{% if request.endpoint.startswith('gigs.') %}active{% endif %}">Koncerty</a>
+        <a href="{{ url_for('komunita_bp.komunita') }}" class="{% if request.endpoint.startswith('komunita_bp.') %}active{% endif %}">Komunita</a>
+        <a href="{{ url_for('kontakt.index') }}" class="{% if request.endpoint.startswith('kontakt.') %}active{% endif %}">Kontakt</a>
+    </nav>
+</header>
     <main class="main-content">
         {% block content %}{% endblock %}
     </main>
@@ -33,5 +39,11 @@
     <footer class="site-footer">
         <p>© 2025 Punkrock 77 — Hudba, která nespí 🤘</p>
     </footer>
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('active');
+        }
+    </script>
+
 </body>
 </html>

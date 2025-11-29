@@ -650,3 +650,50 @@ body {
     margin-top: 1rem;
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
 }
+
+/* === HAMBURGER MENU === */
+
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    color: #c00;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Mobilní verze */
+@media (max-width: 768px) {
+
+    .navbar {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: #111;
+        padding: 20px;
+        gap: 15px;
+        border-top: 2px solid #c00;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        z-index: 100;
+    }
+
+    .navbar a {
+        font-size: 1.2rem;
+        padding: 10px 0;
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

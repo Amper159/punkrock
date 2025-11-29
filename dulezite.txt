@@ -2,3 +2,11 @@
 python import_punk_gigs.py
 # načítání novinek
 python punkradio/seed_news.py
+
+#///💡 Postup:
+
+Ulož tento skript jako deploy_to_pythonanywhere.sh do kořenové složky projektu.
+
+Udělej ho spustitelným: chmod +x deploy_to_pythonanywhere.sh
+Spust: ./deploy_to_pythonanywhere.sh
+///#
