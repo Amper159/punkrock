@@ -10,3 +10,17 @@ Ulož tento skript jako deploy_to_pythonanywhere.sh do kořenové složky projek
 Udělej ho spustitelným: chmod +x deploy_to_pythonanywhere.sh
 Spust: ./deploy_to_pythonanywhere.sh
 ///#
+
+🐍 PYTHONANYWHERE DEPLOY TAHÁK
+
+1) Lokální změny (VS Code)
+   git add .
+   git commit -m "popis"
+   git push
+
+2) PythonAnywhere
+   cd ~/punkrock-1/punkrock-1
+   git pull
+
+3) Reload webu
+   Dashboard → Web → Reload
