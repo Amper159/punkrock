@@ -6,25 +6,35 @@
     <h1 class="punk-heading"> Kontakt</h1>
     <p class="intro-text">
       Máš kapelu, chceš přidat koncert, nebo se chceš zapojit do punkové komunity?
-      Ozvi se nám – punx helping punx!
+      Ozvi se nám!
     </p>
   </div>
 
   <div class="contact-grid">
     <div class="contact-info">
       <h2>Kontaktuj nás</h2>
-      <p><strong>E-mail:</strong> <a href="mailto:info@punkradio.cz">info@punkradio.cz</a></p>
-      <p><strong>Discord:</strong> <a href="https://discord.gg/VCCnc9qu" target="_blank">Připoj se k diskuzi</a></p>
+      <p><strong>E-mail:</strong> <a href="mailto:lampart.m1305@gmail.com">info@punk77.cz</a></p>
+      <p><strong>Discord:</strong> <a href="https://discord.gg/WnB7PsWQUc" target="_blank">Připoj se k diskuzi</a></p>
     </div>
 
     <div class="contact-form">
       <h2>Napiš nám zprávu</h2>
-      <form action="#" method="post" class="punk-form">
-        <input type="text" name="name" placeholder="Tvoje jméno" required>
-        <input type="email" name="email" placeholder="Tvůj e-mail" required>
-        <textarea name="message" placeholder="Zpráva..." rows="5" required></textarea>
-        <button type="submit">Odeslat</button>
-      </form>
+      <form action="https://formsubmit.co/lampart.m1305@gmail.com" method="POST" class="punk-form">
+
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_subject" value="Nová zpráva z Punkrock Rádia">
+
+    <!-- Přesměrování zpět na tvoji stránku -->
+    <input type="hidden" name="_next" value="https://www.punk77.cz/kontakt?odeslano=1">
+
+    <input type="text" name="name" placeholder="Tvoje jméno" required>
+    <input type="email" name="email" placeholder="Tvůj e-mail" required>
+    <textarea name="message" placeholder="Zpráva..." rows="5" required></textarea>
+
+    <button type="submit">Odeslat</button>
+</form>
+
     </div>
   </div>
   
