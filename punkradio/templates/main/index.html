@@ -73,6 +73,9 @@
   <div class="news-grid">
     {% for article in articles %}
       <article class="news-card">
+        {% if article.category and article.category != 'novinka' %}
+          <span class="tag tag-category">{{ {'rozhovor':'Rozhovor','recenze':'Recenze'}.get(article.category, article.category) }}</span>
+        {% endif %}
         {% if article.band %}<span class="tag">{{ article.band }}</span>{% endif %}
         {% if article.source_url %}
           <h3><a href="{{ article.source_url }}" target="_blank" rel="noopener">{{ article.title }}</a></h3>

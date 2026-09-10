@@ -8,9 +8,19 @@
     <a href="{{ url_for('news.rss') }}" class="see-all">RSS</a>
   </div>
 
+  <div class="filter-row">
+    <a href="{{ url_for('news.list_news') }}"><button class="{{ 'active' if not active_category }}">Vše</button></a>
+    {% for key, label in categories.items() %}
+      <a href="{{ url_for('news.list_news', kategorie=key) }}"><button class="{{ 'active' if active_category == key }}">{{ label }}</button></a>
+    {% endfor %}
+  </div>
+
   <div class="news-list">
     {% for article in articles %}
       <article class="news-item">
+        {% if article.category and article.category != 'novinka' %}
+          <span class="tag tag-category">{{ categories.get(article.category, article.category) }}</span>
+        {% endif %}
         {% if article.band %}<span class="tag">{{ article.band }}</span>{% endif %}
         {% if article.source_url %}
           <h2>
@@ -47,7 +57,9 @@
         {% endif %}
       </article>
     {% else %}
-      <p class="text-center">Zatím žádné novinky.</p>
+      <p class="text-center">
+        {% if active_category %}V téhle kategorii zatím nic není.{% else %}Zatím žádné novinky.{% endif %}
+      </p>
     {% endfor %}
   </div>
 </section>

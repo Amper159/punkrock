@@ -232,8 +232,10 @@ def sync_gigs_command(dry_run, keywords, reset):
 @click.option("--source", "source_name", default=None, help="Název zdroje, např. insounder.org")
 @click.option("--perex", default=None, help="Krátký vlastní popisek (nekopírovat text ze zdroje).")
 @click.option("--band", default=None, help="Kapela, ke které se novinka váže.")
+@click.option("--category", type=click.Choice(["novinka", "rozhovor", "recenze"]), default="novinka",
+              help="Typ obsahu — novinka (výchozí), rozhovor nebo recenze.")
 @with_appcontext
-def add_news_command(title, source_url, source_name, perex, band):
+def add_news_command(title, source_url, source_name, perex, band, category):
     """Přidá curated novinku typu link-out (titulek + odkaz na originál)."""
     slug_base = _slugify(title)
     slug = slug_base
@@ -250,11 +252,12 @@ def add_news_command(title, source_url, source_name, perex, band):
         content="",  # obsah se nekopíruje, viz source_url
         source_url=source_url,
         source_name=source_name,
+        category=category,
         published_at=datetime.utcnow(),
     )
     db.session.add(article)
     db.session.commit()
-    click.echo(f"Přidáno: {title}  ({slug}) -> {source_url}")
+    click.echo(f"Přidáno [{category}]: {title}  ({slug}) -> {source_url}")
 
 
 SEED_BANDS = [

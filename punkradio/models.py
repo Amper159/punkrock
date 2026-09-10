@@ -35,6 +35,7 @@ class Article(db.Model):
     tags = db.Column(db.JSON)
     source_url = db.Column(db.String(500))    # externí odkaz na plný článek (curated link-out)
     source_name = db.Column(db.String(120))   # název zdroje, např. "insounder.org"
+    category = db.Column(db.String(20), default="novinka", index=True)  # "novinka" | "rozhovor" | "recenze"
     published_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
 

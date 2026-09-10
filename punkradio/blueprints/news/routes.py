@@ -1,14 +1,27 @@
 from xml.sax.saxutils import escape
-from flask import Blueprint, render_template, abort, Response, url_for
+from flask import Blueprint, render_template, abort, Response, url_for, request
 from punkradio.models import Article, Comment
 from punkradio.forms import CommentForm
 
 bp = Blueprint("news", __name__, url_prefix="/novinky")
 
+_CATEGORIES = {
+    "novinka": "Novinky",
+    "rozhovor": "Rozhovory",
+    "recenze": "Recenze",
+}
+
 @bp.route("/")
 def list_news():
-    articles = Article.query.order_by(Article.published_at.desc()).all()
-    return render_template("news/index.html", articles=articles)
+    category = request.args.get("kategorie")
+    query = Article.query
+    if category in _CATEGORIES:
+        query = query.filter_by(category=category)
+    articles = query.order_by(Article.published_at.desc()).all()
+    return render_template(
+        "news/index.html", articles=articles,
+        active_category=category, categories=_CATEGORIES,
+    )
 
 @bp.route("/<slug>")
 def detail(slug):
