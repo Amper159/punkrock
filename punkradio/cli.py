@@ -113,10 +113,19 @@ def _parse_event(event: dict):
 
     venue = None
     city = None
+    latitude = None
+    longitude = None
     place = event.get("place") or event.get("venue")
     if isinstance(place, dict):
         venue = place.get("company") or place.get("name") or place.get("venue")
         city = place.get("city") or place.get("town")
+        wgs84 = place.get("wgs84")
+        if isinstance(wgs84, dict):
+            try:
+                latitude = float(wgs84.get("latitude"))
+                longitude = float(wgs84.get("longitude"))
+            except (TypeError, ValueError):
+                latitude = longitude = None
     elif isinstance(place, str):
         venue = place
     city = city or event.get("city") or event.get("town")
@@ -129,6 +138,8 @@ def _parse_event(event: dict):
         "city": city,
         "venue": venue,
         "lineup": [name],
+        "latitude": latitude,
+        "longitude": longitude,
     }
 
 
@@ -202,6 +213,8 @@ def sync_gigs_command(dry_run, keywords, reset):
             city=parsed["city"],
             venue=parsed["venue"],
             lineup=parsed["lineup"],
+            latitude=parsed["latitude"],
+            longitude=parsed["longitude"],
             source="smsticket",
             external_id=parsed["external_id"],
         )

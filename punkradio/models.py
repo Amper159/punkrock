@@ -17,6 +17,8 @@ class Gig(db.Model):
     city = db.Column(db.String(80))
     venue = db.Column(db.String(120))
     lineup = db.Column(db.JSON)             # ["Kapela A", "Kapela B"]
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
     source = db.Column(db.String(40))                       # "manual" / "smsticket"
     external_id = db.Column(db.String(120), unique=True, index=True, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)

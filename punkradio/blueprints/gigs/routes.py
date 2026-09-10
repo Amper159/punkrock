@@ -1,6 +1,5 @@
-from datetime import date
-from flask import Blueprint
-from flask import render_template
+from datetime import date, timedelta
+from flask import Blueprint, render_template, abort, Response
 from punkradio.models import Gig
 
 
@@ -18,7 +17,62 @@ def gigs_list():
         .all()
     )
 
-    return render_template("gigs/koncerty.html", gigs=gigs, today=today)
+    map_gigs = [
+        {
+            "lat": g.latitude,
+            "lng": g.longitude,
+            "name": ", ".join(g.lineup) if g.lineup else "Neznámá kapela",
+            "venue": g.venue or "",
+            "city": g.city or "",
+            "date": g.date.strftime("%d.%m.%Y"),
+            "id": g.id,
+        }
+        for g in gigs
+        if g.latitude is not None and g.longitude is not None
+    ]
+
+    return render_template("gigs/koncerty.html", gigs=gigs, today=today, map_gigs=map_gigs)
 
 
+def _ics_escape(value: str) -> str:
+    return (value or "").replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replace("\n", "\\n")
 
+
+@bp.route("/<int:gig_id>.ics")
+def gig_ics(gig_id):
+    gig = Gig.query.get(gig_id)
+    if not gig:
+        abort(404)
+
+    summary = ", ".join(gig.lineup) if gig.lineup else "Punkový koncert"
+    location_parts = [p for p in [gig.venue, gig.city] if p]
+    location = ", ".join(location_parts)
+
+    dtstart = gig.date.strftime("%Y%m%d")
+    dtend = (gig.date + timedelta(days=1)).strftime("%Y%m%d")
+    dtstamp = date.today().strftime("%Y%m%dT000000Z")
+    uid = f"gig-{gig.id}@punk77.cz"
+
+    lines = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Punkrock 77//koncerty//CS",
+        "CALSCALE:GREGORIAN",
+        "BEGIN:VEVENT",
+        f"UID:{uid}",
+        f"DTSTAMP:{dtstamp}",
+        f"DTSTART;VALUE=DATE:{dtstart}",
+        f"DTEND;VALUE=DATE:{dtend}",
+        f"SUMMARY:{_ics_escape(summary)}",
+        f"LOCATION:{_ics_escape(location)}",
+        f"DESCRIPTION:{_ics_escape('Koncert na Punkrock 77 — ' + summary)}",
+        "END:VEVENT",
+        "END:VCALENDAR",
+    ]
+    body = "\r\n".join(lines) + "\r\n"
+
+    return Response(
+        body,
+        mimetype="text/calendar",
+        headers={"Content-Disposition": f"attachment; filename=koncert-{gig.id}.ics"},
+    )

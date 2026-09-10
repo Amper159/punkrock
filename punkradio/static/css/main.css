@@ -228,6 +228,14 @@ section h2{ font-size:2rem; }
   padding:30px 28px; font-size:0.8rem; text-align:center;
 }
 
+.gigs-map{ width:100%; height:380px; border:2px solid var(--ink); margin-bottom:12px; filter: grayscale(0.15) contrast(1.05); }
+.map-note{ font-size:0.78rem; opacity:0.6; margin-bottom:26px; }
+.ics-link{
+  display:inline-block; margin-top:12px; font-size:0.75rem; text-decoration:underline;
+  text-underline-offset:3px; opacity:0.8; padding-right:56px;
+}
+.ics-link:hover{ opacity:1; color:var(--pink); }
+
 @media (max-width:640px){
   section{ padding:36px 20px; }
   .hero{ padding:44px 20px 64px; }

@@ -3,7 +3,10 @@
 
 {% block content %}
 <section class="news-section">
-  <h1>Punkové novinky</h1>
+  <div class="section-head">
+    <h1 style="border:none; margin:0;">Punkové novinky</h1>
+    <a href="{{ url_for('news.rss') }}" class="see-all">RSS</a>
+  </div>
 
   <div class="news-list">
     {% for article in articles %}

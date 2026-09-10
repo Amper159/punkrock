@@ -2,10 +2,39 @@
 {% block title %}Koncerty — Punkrock 77{% endblock %}
 {% block content %}
 
+{% if map_gigs %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+{% endif %}
+
 <section>
   <div class="section-head">
     <h2>Nadcházející koncerty</h2>
+    <a href="{{ url_for('news.rss') }}" class="see-all">RSS novinek</a>
   </div>
+
+  {% if map_gigs %}
+    <div id="gigs-map" class="gigs-map"></div>
+    <script>
+      (function () {
+        var gigs = {{ map_gigs | tojson }};
+        var map = L.map('gigs-map').setView([49.8, 15.5], 7);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap přispěvatelé',
+          maxZoom: 18,
+        }).addTo(map);
+        gigs.forEach(function (g) {
+          var marker = L.marker([g.lat, g.lng]).addTo(map);
+          marker.bindPopup(
+            '<strong>' + g.name + '</strong><br>' +
+            g.date + ' &middot; ' + g.venue + (g.city ? ', ' + g.city : '') +
+            '<br><a href="/koncerty/' + g.id + '.ics">Přidat do kalendáře</a>'
+          );
+        });
+      })();
+    </script>
+    <p class="map-note">Na mapě jsou jen akce, u kterých máme souřadnice místa konání — kompletní seznam je níž.</p>
+  {% endif %}
 
   {% if gigs %}
     <div class="gig-grid">
@@ -14,6 +43,7 @@
           <div class="date">{{ gig.date.strftime('%d.%m.%Y') }}</div>
           <h3>{{ gig.lineup|join(' | ') if gig.lineup else 'Neznámá kapela' }}</h3>
           <p class="place">{{ gig.city or 'Neznámé město' }}{% if gig.venue %} – {{ gig.venue }}{% endif %}</p>
+          <a href="{{ url_for('gigs.gig_ics', gig_id=gig.id) }}" class="ics-link">+ přidat do kalendáře</a>
         </div>
       {% endfor %}
     </div>
