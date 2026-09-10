@@ -41,23 +41,47 @@ from .models import Gig, Article
 SMSTICKET_API_URL = "https://www.smsticket.cz/api/public/v1.1/events"
 
 DEFAULT_KEYWORDS = [
-    "punk", "hardcore", "oldschool", "street punk", "streetpunk",
-    "ska", "grunge", "pop punk", "poppunk",
+    "punk", "hardcore", "oldschool", "streetpunk", "ska",
+    "grunge", "poppunk",
 ]
+
+_TAG_RE = re.compile(r"<[^>]+>")
+
+
+def _strip_html(value: str) -> str:
+    return _TAG_RE.sub(" ", value or "")
+
+
+def _keyword_pattern(keywords: list[str]) -> "re.Pattern":
+    # Krátká slova jako "ska" musí sedět jako celé slovo (jinak chytnou
+    # "riskantní", "skautský" apod.). Delší klíčová slova (punk, hardcore...)
+    # smí mít za sebou další písmena, aby chytla i česká skloňování a
+    # složeniny (punkrock, punková, hardcorový, poppunkový...), ale ne
+    # PŘED sebou — takže "expunk" by nešlo, ale "punkrockový" ano.
+    parts = []
+    for kw in keywords:
+        kw = kw.strip().lower()
+        if not kw:
+            continue
+        escaped = re.escape(kw)
+        if len(kw.replace(" ", "")) <= 3:
+            parts.append(rf"\b{escaped}\b")
+        else:
+            parts.append(rf"\b{escaped}\w*")
+    return re.compile("|".join(parts), re.IGNORECASE) if parts else re.compile(r"(?!)")
+
+
+def _matches_keywords(event: dict, pattern: "re.Pattern") -> bool:
+    name = str(event.get("name", "") or "")
+    description = _strip_html(str(event.get("description", "") or ""))
+    haystack = f"{name} {description}"
+    return bool(pattern.search(haystack))
 
 
 def _slugify(value: str) -> str:
     value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
     value = re.sub(r"[^\w\s-]", "", value).strip().lower()
     return re.sub(r"[-\s]+", "-", value)
-
-
-def _matches_keywords(event: dict, keywords: list[str]) -> bool:
-    haystack = " ".join(
-        str(event.get(field, "") or "")
-        for field in ("name", "description", "genre", "category")
-    ).lower()
-    return any(kw in haystack for kw in keywords)
 
 
 def _parse_event(event: dict):
@@ -111,10 +135,12 @@ def _parse_event(event: dict):
 @click.command("sync-gigs")
 @click.option("--dry-run", is_flag=True, help="Jen stáhne a vypíše první event, nic neukládá do DB.")
 @click.option("--keywords", default=None, help="Čárkou oddělený seznam klíčových slov (přepíše výchozí).")
+@click.option("--reset", is_flag=True, help="Před importem smaže všechny dřív naimportované smsticket koncerty (source='smsticket'). Ruční/manuální koncerty nechá být.")
 @with_appcontext
-def sync_gigs_command(dry_run, keywords):
+def sync_gigs_command(dry_run, keywords, reset):
     """Stáhne akce ze SMSticket.cz a uloží ty, co odpovídají žánru."""
     kw_list = [k.strip().lower() for k in keywords.split(",")] if keywords else DEFAULT_KEYWORDS
+    pattern = _keyword_pattern(kw_list)
 
     click.echo(f"Stahuji {SMSTICKET_API_URL} ...")
     try:
@@ -125,7 +151,8 @@ def sync_gigs_command(dry_run, keywords):
         click.echo(f"Chyba při stahování: {e}", err=True)
         return
 
-    events = data.get("events", {}).get("event", [])
+    events_root = data.get("events") or {}
+    events = events_root.get("event", [])
     if isinstance(events, dict):
         events = [events]
     click.echo(f"Staženo {len(events)} akcí celkem.")
@@ -138,7 +165,8 @@ def sync_gigs_command(dry_run, keywords):
             nested = [k for k, v in ev.items() if isinstance(v, (dict, list))]
             if "description" in flat:
                 flat["description"] = f"<{len(str(flat['description']))} znaků HTML>"
-            click.echo(f"[event {i}] name={ev.get('name')!r}")
+            matched = _matches_keywords(ev, pattern)
+            click.echo(f"[event {i}] name={ev.get('name')!r}  MATCH={matched}")
             click.echo(f"  jednoduchá pole: {json.dumps(flat, ensure_ascii=False)}")
             click.echo(f"  vnořená pole:    {nested}")
             for nk in nested:
@@ -146,10 +174,14 @@ def sync_gigs_command(dry_run, keywords):
                     continue
                 click.echo(f"    {nk} = {json.dumps(ev[nk], ensure_ascii=False)}")
         click.echo("--- konec dry-run, nic se neuložilo ---")
-        click.echo("Pošli mi prosím celý tenhle výstup (ideálně přes 'flask sync-gigs --dry-run > dryrun.txt' a obsah souboru), ať zkontroluju mapování polí.")
         return
 
-    matched = [e for e in events if _matches_keywords(e, kw_list)]
+    if reset:
+        deleted = Gig.query.filter_by(source="smsticket").delete()
+        db.session.commit()
+        click.echo(f"--reset: smazáno {deleted} dřív naimportovaných smsticket koncertů.")
+
+    matched = [e for e in events if _matches_keywords(e, pattern)]
     click.echo(f"Odpovídá klíčovým slovům {kw_list}: {len(matched)} akcí.")
 
     created, skipped = 0, 0
