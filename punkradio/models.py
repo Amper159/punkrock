@@ -54,6 +54,6 @@ class GigPhoto(db.Model):
     uploader_name = db.Column(db.String(80), nullable=False)
     caption = db.Column(db.String(200))
     filename = db.Column(db.String(255), nullable=False)
-    is_approved = db.Column(db.Boolean, default=False, index=True)  # fotky se schvalují předem
+    is_approved = db.Column(db.Boolean, default=True, index=True)  # fotky se teď publikují rovnou
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     gig = db.relationship("Gig", backref="photos")

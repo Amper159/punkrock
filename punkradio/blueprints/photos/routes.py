@@ -52,11 +52,11 @@ def submit_photo():
             uploader_name=form.uploader_name.data.strip(),
             caption=(form.caption.data or "").strip() or None,
             filename=filename,
-            is_approved=False,
+            is_approved=True,
         )
         db.session.add(photo)
         db.session.commit()
-        flash("Díky! Fotka čeká na schválení, pak se objeví v galerii.", "success")
-        return redirect(url_for("photos.submit_photo"))
+        flash("Díky! Fotka je nahraná a hned uvidíš ji v galerii.", "success")
+        return redirect(url_for("photos.gallery"))
 
     return render_template("photos/submit.html", form=form, recent_gigs=recent_gigs)
