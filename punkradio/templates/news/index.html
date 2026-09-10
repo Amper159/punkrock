@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-{% block title %}Novinky{% endblock %}
+{% block title %}Novinky — Punkrock 77{% endblock %}
 
 {% block content %}
 <section class="news-section">
-  <h1 class="text-center">Punkové novinky</h1>
+  <h1>Punkové novinky</h1>
 
   <div class="news-list">
     {% for article in articles %}
       <article class="news-item">
+        {% if article.band %}<span class="tag">{{ article.band }}</span>{% endif %}
         <h2>
           <a href="{{ url_for('news.detail', slug=article.slug) }}">
             {{ article.title }}
@@ -15,20 +16,20 @@
         </h2>
 
         <p class="meta">
-          Publikováno: {{ article.published_at.strftime('%d.%m.%Y') }}
-          {% if article.band %} | Kapela: <strong>{{ article.band }}</strong>{% endif %}
+          {{ article.published_at.strftime('%d.%m.%Y') }}
+          {% if article.band %} · Kapela: <strong>{{ article.band }}</strong>{% endif %}
         </p>
 
         {% if article.perex %}
           <p class="perex">{{ article.perex }}</p>
         {% endif %}
 
-        <a href="{{ url_for('news.detail', slug=article.slug) }}" class="btn btn-read">
-          Číst dál →
+        <a href="{{ url_for('news.detail', slug=article.slug) }}" class="btn-read">
+          Číst dál
         </a>
       </article>
     {% else %}
-      <p class="text-center">Zatím žádné novinky 😢</p>
+      <p class="text-center">Zatím žádné novinky.</p>
     {% endfor %}
   </div>
 </section>

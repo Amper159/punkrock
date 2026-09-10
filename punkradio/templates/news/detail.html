@@ -6,8 +6,8 @@
   <h1>{{ article.title }}</h1>
 
   <p class="meta">
-    Publikováno: {{ article.published_at.strftime('%d.%m.%Y') }}
-    {% if article.band %} | Kapela: <strong>{{ article.band }}</strong>{% endif %}
+    {{ article.published_at.strftime('%d.%m.%Y') }}
+    {% if article.band %} · Kapela: <strong>{{ article.band }}</strong>{% endif %}
   </p>
 
   <article class="content">
@@ -15,7 +15,7 @@
   </article>
 
   <div class="back-link">
-    <a href="{{ url_for('news.list_news') }}" class="btn btn-back">
+    <a href="{{ url_for('news.list_news') }}" class="btn-back">
       ← Zpět na novinky
     </a>
   </div>

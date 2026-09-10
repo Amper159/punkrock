@@ -3,47 +3,94 @@
 
 {% block content %}
 <section class="hero">
-  <h1> Vítej na Punkrock 77 </h1>
-  <p>
-    Tohle není žádný sterilní hudební portál.  
-    Tohle je místo, kde <strong>punk ještě žije</strong> — bez cenzury, bez pozlátek, bez kalkulů.  
-    Sleduj koncerty, objevuj kapely a drž scénu při životě.  
-  </p>
-  <p>
-    Každý týden přinášíme <strong>nejnovější punkové akce</strong> z klubů po celé republice.  
-    Ať už jsi z Brna, Ostravy, nebo z nejzapadlejší vesnice – punk tě najde.
-  </p>
-</section>
-
-<section class="concerts-preview">
-  <h2>Nejbližší koncerty</h2>
-
-  {% if gigs %}
-    {% for gig in gigs %}
-      <div class="concert-card">
-        <div class="date">📅 {{ gig.date.strftime('%d.%m.%Y') }}</div>
-        <h3>🎸 {{ gig.lineup|join(' | ') }}</h3>
-        <p class="city">📍 {{ gig.city }} – {{ gig.venue }}</p>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p>Momentálně nejsou žádné plánované koncerty.</p>
-  {% endif %}
-
-  <div class="more-concerts">
-    <a href="{{ url_for('gigs.gigs_list') }}" class="button">Zobrazit všechny koncerty →</a>
+  <div class="hero-inner">
+    <h1>Scéna nespí</h1>
+    <p>
+      Tohle není žádný sterilní hudební portál. Tohle je místo, kde <strong>punk ještě žije</strong>
+      — bez cenzury, bez pozlátek, bez kalkulů. Sleduj koncerty, objevuj kapely a drž scénu při životě.
+    </p>
   </div>
 </section>
 
-<section class="about">
-  <h2>O nás</h2>
-  <p>
-    Punkrock 77 vznikl z lásky ke klubům, kapelám a fanouškům, kteří to pořád cítí.  
-    Žádná reklama, žádné algoritmy – jen <strong>čistá energie scény</strong>.
-  </p>
-  <p>
-    Chceš, aby se tvá kapela nebo koncert objevil tady?  
-    Napiš nám přes <a href="{{ url_for('kontakt.index') }}">kontakt</a> a ozveme se ti.  
-  </p>
+{% if gigs %}
+<div class="ticker-wrap">
+  <div class="ticker">
+    {% for gig in gigs %}
+      <span>★ {{ gig.lineup|join(' + ') if gig.lineup else 'Neznámá kapela' }} — {{ gig.date.strftime('%d.%m.') }} {{ gig.city }}</span>
+    {% endfor %}
+    {% for gig in gigs %}
+      <span>★ {{ gig.lineup|join(' + ') if gig.lineup else 'Neznámá kapela' }} — {{ gig.date.strftime('%d.%m.') }} {{ gig.city }}</span>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+<section class="concerts-preview">
+  <div class="section-head">
+    <h2>Nejbližší koncerty</h2>
+    <a href="{{ url_for('gigs.gigs_list') }}" class="see-all">všechny koncerty</a>
+  </div>
+
+  {% if gigs %}
+    <div class="gig-grid">
+      {% for gig in gigs %}
+        <div class="concert-card">
+          <div class="date">{{ gig.date.strftime('%d.%m.%Y') }}</div>
+          <h3>{{ gig.lineup|join(' | ') if gig.lineup else 'Neznámá kapela' }}</h3>
+          <p class="city">{{ gig.city or 'Neznámé město' }}{% if gig.venue %} – {{ gig.venue }}{% endif %}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">Momentálně nejsou žádné plánované koncerty.</p>
+  {% endif %}
 </section>
+
+{% if articles %}
+<section class="news-preview" style="background:var(--paper-2);">
+  <div class="section-head">
+    <h2>Poslední novinky</h2>
+    <a href="{{ url_for('news.list_news') }}" class="see-all">všechny novinky</a>
+  </div>
+  <div class="news-grid">
+    {% for article in articles %}
+      <article class="news-card">
+        {% if article.band %}<span class="tag">{{ article.band }}</span>{% endif %}
+        <h3><a href="{{ url_for('news.detail', slug=article.slug) }}">{{ article.title }}</a></h3>
+        {% if article.perex %}<p>{{ article.perex }}</p>{% endif %}
+        <div class="meta">{{ article.published_at.strftime('%d.%m.%Y') }}</div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if bands %}
+<section class="bands-preview">
+  <div class="section-head">
+    <h2>Kapely, co stojí za pozornost</h2>
+    <a href="{{ url_for('bands.list_bands') }}" class="see-all">celá scéna</a>
+  </div>
+  <div class="band-strip">
+    {% for band in bands %}
+      <div class="band-cell">
+        <h3>{{ band.name }}</h3>
+        <p>{{ band.city or '' }}{% if band.styles %} · {{ band.styles }}{% endif %}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<div class="community">
+  <div class="community-inner">
+    <div>
+      <h2>Naskoč mezi nás na Discordu</h2>
+      <p>Diskuze o kapelách, koncertech a nových deskách. Žije to tam 24/7 — stačí naskočit.
+      Chceš, aby se tvá kapela nebo koncert objevil na webu? Napiš nám přes
+      <a href="{{ url_for('kontakt.index') }}" style="color:var(--yellow);">kontakt</a>.</p>
+    </div>
+    <a href="{{ url_for('komunita_bp.komunita') }}" class="button">Připojit se</a>
+  </div>
+</div>
 {% endblock %}

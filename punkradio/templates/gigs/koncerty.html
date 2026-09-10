@@ -1,25 +1,24 @@
 {% extends "base.html" %}
+{% block title %}Koncerty — Punkrock 77{% endblock %}
 {% block content %}
-<div class="container text-center">
-  <h2 class="text-red-500 mb-4 mt-5">Nadcházející koncerty</h2>
+
+<section>
+  <div class="section-head">
+    <h2>Nadcházející koncerty</h2>
+  </div>
 
   {% if gigs %}
-    {% for gig in gigs %}
-      <div class="concert-card" style="
-          border: 1px solid #800;
-          background-color: #150a0a;
-          border-radius: 8px;
-          margin: 1rem auto;
-          padding: 1rem;
-          max-width: 700px;
-          color: #eee;">
-        <p>📅 <strong>{{ gig.date.strftime('%d.%m.%Y') }}</strong></p>
-        <p>🎤 {{ gig.lineup[0] if gig.lineup else 'Neznámá kapela' }}</p>
-        <p>📍 {{ gig.city }} – {{ gig.venue }}</p>
-      </div>
-    {% endfor %}
+    <div class="gig-grid">
+      {% for gig in gigs %}
+        <div class="gig-card">
+          <div class="date">{{ gig.date.strftime('%d.%m.%Y') }}</div>
+          <h3>{{ gig.lineup|join(' | ') if gig.lineup else 'Neznámá kapela' }}</h3>
+          <p class="place">{{ gig.city or 'Neznámé město' }}{% if gig.venue %} – {{ gig.venue }}{% endif %}</p>
+        </div>
+      {% endfor %}
+    </div>
   {% else %}
-    <p class="text-gray-400 mt-4">Momentálně nejsou žádné plánované koncerty 🎧</p>
+    <p class="text-muted">Momentálně nejsou žádné plánované koncerty 🎧</p>
   {% endif %}
-</div>
+</section>
 {% endblock %}
