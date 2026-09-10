@@ -86,7 +86,7 @@ def _parse_event(event: dict):
     city = None
     place = event.get("place") or event.get("venue")
     if isinstance(place, dict):
-        venue = place.get("name") or place.get("venue")
+        venue = place.get("company") or place.get("name") or place.get("venue")
         city = place.get("city") or place.get("town")
     elif isinstance(place, str):
         venue = place
@@ -126,9 +126,22 @@ def sync_gigs_command(dry_run, keywords):
     click.echo(f"Staženo {len(events)} akcí celkem.")
 
     if dry_run:
-        click.echo("--- DRY RUN: syrová struktura prvního eventu ---")
-        click.echo(json.dumps(events[0] if events else {}, indent=2, ensure_ascii=False))
+        sample = events[:5]
+        click.echo(f"--- DRY RUN: přehled polí prvních {len(sample)} eventů ---")
+        for i, ev in enumerate(sample):
+            flat = {k: v for k, v in ev.items() if not isinstance(v, (dict, list))}
+            nested = [k for k, v in ev.items() if isinstance(v, (dict, list))]
+            if "description" in flat:
+                flat["description"] = f"<{len(str(flat['description']))} znaků HTML>"
+            click.echo(f"[event {i}] name={ev.get('name')!r}")
+            click.echo(f"  jednoduchá pole: {json.dumps(flat, ensure_ascii=False)}")
+            click.echo(f"  vnořená pole:    {nested}")
+            for nk in nested:
+                if nk == "photos":
+                    continue
+                click.echo(f"    {nk} = {json.dumps(ev[nk], ensure_ascii=False)}")
         click.echo("--- konec dry-run, nic se neuložilo ---")
+        click.echo("Pošli mi prosím celý tenhle výstup (ideálně přes 'flask sync-gigs --dry-run > dryrun.txt' a obsah souboru), ať zkontroluju mapování polí.")
         return
 
     matched = [e for e in events if _matches_keywords(e, kw_list)]
