@@ -56,9 +56,16 @@
     {% for article in articles %}
       <article class="news-card">
         {% if article.band %}<span class="tag">{{ article.band }}</span>{% endif %}
-        <h3><a href="{{ url_for('news.detail', slug=article.slug) }}">{{ article.title }}</a></h3>
+        {% if article.source_url %}
+          <h3><a href="{{ article.source_url }}" target="_blank" rel="noopener">{{ article.title }}</a></h3>
+        {% else %}
+          <h3><a href="{{ url_for('news.detail', slug=article.slug) }}">{{ article.title }}</a></h3>
+        {% endif %}
         {% if article.perex %}<p>{{ article.perex }}</p>{% endif %}
-        <div class="meta">{{ article.published_at.strftime('%d.%m.%Y') }}</div>
+        <div class="meta">
+          {{ article.published_at.strftime('%d.%m.%Y') }}
+          {% if article.source_name %} · {{ article.source_name }}{% endif %}
+        </div>
       </article>
     {% endfor %}
   </div>

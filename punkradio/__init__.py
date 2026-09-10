@@ -35,4 +35,7 @@ def create_app():
     def inject_today():
         return {"today": date.today()}
 
+    from .cli import register_cli
+    register_cli(app)
+
     return app

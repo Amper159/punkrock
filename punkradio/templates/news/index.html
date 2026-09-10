@@ -9,24 +9,39 @@
     {% for article in articles %}
       <article class="news-item">
         {% if article.band %}<span class="tag">{{ article.band }}</span>{% endif %}
-        <h2>
-          <a href="{{ url_for('news.detail', slug=article.slug) }}">
-            {{ article.title }}
-          </a>
-        </h2>
+        {% if article.source_url %}
+          <h2>
+            <a href="{{ article.source_url }}" target="_blank" rel="noopener">
+              {{ article.title }}
+            </a>
+          </h2>
+        {% else %}
+          <h2>
+            <a href="{{ url_for('news.detail', slug=article.slug) }}">
+              {{ article.title }}
+            </a>
+          </h2>
+        {% endif %}
 
         <p class="meta">
           {{ article.published_at.strftime('%d.%m.%Y') }}
           {% if article.band %} · Kapela: <strong>{{ article.band }}</strong>{% endif %}
+          {% if article.source_name %} · Zdroj: <strong>{{ article.source_name }}</strong>{% endif %}
         </p>
 
         {% if article.perex %}
           <p class="perex">{{ article.perex }}</p>
         {% endif %}
 
-        <a href="{{ url_for('news.detail', slug=article.slug) }}" class="btn-read">
-          Číst dál
-        </a>
+        {% if article.source_url %}
+          <a href="{{ article.source_url }}" target="_blank" rel="noopener" class="btn-read">
+            Celý článek na {{ article.source_name or 'zdroji' }} ↗
+          </a>
+        {% else %}
+          <a href="{{ url_for('news.detail', slug=article.slug) }}" class="btn-read">
+            Číst dál
+          </a>
+        {% endif %}
       </article>
     {% else %}
       <p class="text-center">Zatím žádné novinky.</p>
