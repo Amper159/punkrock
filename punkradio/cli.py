@@ -72,7 +72,12 @@ def _parse_event(event: dict):
     """
     external_id = event.get("id") or event.get("@id") or event.get("eventId")
 
-    raw_date = event.get("date") or event.get("date_from") or event.get("dateFrom")
+    raw_date = None
+    dates_obj = event.get("dates")
+    if isinstance(dates_obj, dict):
+        raw_date = dates_obj.get("start_date")
+    raw_date = raw_date or event.get("date") or event.get("date_from") or event.get("dateFrom")
+
     event_date = None
     if raw_date:
         for fmt in ("%Y-%m-%d", "%Y-%m-%dT%H:%M:%S", "%d.%m.%Y"):
