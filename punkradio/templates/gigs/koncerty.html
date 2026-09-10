@@ -22,10 +22,9 @@
       (function () {
         var gigs = {{ map_gigs | tojson }};
         var map = L.map('gigs-map', { scrollWheelZoom: false }).setView([49.8, 15.5], 7);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; OpenStreetMap, &copy; CARTO',
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap přispěvatelé',
           maxZoom: 18,
-          subdomains: 'abcd',
         }).addTo(map);
 
         var punkIcon = L.divIcon({
