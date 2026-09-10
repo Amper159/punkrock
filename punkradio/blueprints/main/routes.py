@@ -26,5 +26,15 @@ def index():
         .limit(6)
         .all()
     )
-    return render_template("main/index.html", gigs=gigs, articles=articles, bands=bands)
+
+    # 🎸 Kapela měsíce — deterministický výběr podle měsíce, mění se samo bez zásahu
+    all_approved = Band.query.filter_by(is_approved=True).order_by(Band.id.asc()).all()
+    band_of_month = None
+    if all_approved:
+        idx = (today.year * 12 + today.month) % len(all_approved)
+        band_of_month = all_approved[idx]
+
+    return render_template(
+        "main/index.html", gigs=gigs, articles=articles, bands=bands, band_of_month=band_of_month
+    )
 

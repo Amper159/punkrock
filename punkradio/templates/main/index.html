@@ -25,6 +25,24 @@
 </div>
 {% endif %}
 
+{% if band_of_month %}
+<div class="band-of-month">
+  <div class="band-of-month-inner">
+    <span class="bom-label">Kapela měsíce</span>
+    <h2>{{ band_of_month.name }}</h2>
+    <p class="bom-meta">{{ band_of_month.city or '' }}{% if band_of_month.styles %} · {{ band_of_month.styles }}{% endif %}</p>
+    {% if band_of_month.about %}<p class="bom-about">{{ band_of_month.about }}</p>{% endif %}
+    {% if band_of_month.links %}
+      <div class="bom-links">
+        {% if band_of_month.links.spotify %}<a href="{{ band_of_month.links.spotify }}" target="_blank">Spotify</a>{% endif %}
+        {% if band_of_month.links.bandcamp %}<a href="{{ band_of_month.links.bandcamp }}" target="_blank">Bandcamp</a>{% endif %}
+        {% if band_of_month.links.web %}<a href="{{ band_of_month.links.web }}" target="_blank">Web</a>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
 <section class="concerts-preview">
   <div class="section-head">
     <h2>Nejbližší koncerty</h2>

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Nahrát fotku — Punkrock 77{% endblock %}
+{% block content %}
+<section>
+  <h1>Nahraj fotku z koncertu</h1>
+
+  {% with msgs = get_flashed_messages(with_categories=true) %}
+    {% if msgs %}
+      {% for cat, msg in msgs %}
+        <div class="flash-msg">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" enctype="multipart/form-data" class="photo-form">
+    {{ form.hidden_tag() }}
+    <label>
+      <span>Jméno*</span>
+      {{ form.uploader_name(required=True) }}
+      {% for e in form.uploader_name.errors %}<small style="color:var(--pink);">{{ e }}</small>{% endfor %}
+    </label>
+    <label>
+      <span>Ke kterému koncertu fotka patří? (nepovinné)</span>
+      <select name="gig_id">
+        <option value="">— bez přiřazení —</option>
+        {% for g in recent_gigs %}
+          <option value="{{ g.id }}">{{ g.date.strftime('%d.%m.%Y') }} — {{ g.lineup|join(', ') if g.lineup else 'Neznámá kapela' }}{% if g.city %} ({{ g.city }}){% endif %}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <label>
+      <span>Popisek</span>
+      {{ form.caption(placeholder="Co je na fotce, jaká byla atmosféra...") }}
+    </label>
+    <label>
+      <span>Fotka* (JPG, PNG, WEBP)</span>
+      {{ form.photo() }}
+      {% for e in form.photo.errors %}<small style="color:var(--pink);">{{ e }}</small>{% endfor %}
+    </label>
+    <div class="hp-field" aria-hidden="true">{{ form.website() }}</div>
+    <button type="submit">Nahrát fotku</button>
+  </form>
+
+  <p class="text-muted" style="margin-top:16px; font-size:0.8rem;">
+    Fotka se po nahrání nejdřív zobrazí nám ke schválení, pak se objeví v
+    <a href="{{ url_for('photos.gallery') }}">galerii</a>.
+  </p>
+</section>
+{% endblock %}

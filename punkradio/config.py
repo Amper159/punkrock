@@ -9,6 +9,9 @@ class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'supersecretkey')
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(basedir, "instance", "app.db")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    UPLOAD_FOLDER = os.path.join(basedir, "static", "uploads", "gigs")
+    MAX_CONTENT_LENGTH = 6 * 1024 * 1024  # 6 MB na request (jedna fotka)
+    ALLOWED_PHOTO_EXTENSIONS = {"jpg", "jpeg", "png", "webp"}
 
 
 class DevelopmentConfig(Config):

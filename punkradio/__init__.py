@@ -9,6 +9,8 @@ from punkradio.blueprints.gigs.routes import bp as gigs_bp
 from punkradio.blueprints.news.routes import bp as news_bp
 from punkradio.blueprints.komunita import bp as komunita_bp
 from punkradio.blueprints.Kontakt import bp as kontakt_bp
+from punkradio.blueprints.comments import bp as comments_bp
+from punkradio.blueprints.photos import bp as photos_bp
 
 
 def create_app():
@@ -27,6 +29,8 @@ def create_app():
     app.register_blueprint(news_bp, url_prefix="/novinky")
     app.register_blueprint(komunita_bp, url_prefix="/komunita")
     app.register_blueprint(kontakt_bp, url_prefix="/kontakt")
+    app.register_blueprint(comments_bp, url_prefix="/komentare")
+    app.register_blueprint(photos_bp, url_prefix="/fotky")
 
     # Kontextová proměnná pro patičku
     from datetime import date

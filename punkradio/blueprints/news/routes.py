@@ -1,6 +1,7 @@
 from xml.sax.saxutils import escape
 from flask import Blueprint, render_template, abort, Response, url_for
-from punkradio.models import Article
+from punkradio.models import Article, Comment
+from punkradio.forms import CommentForm
 
 bp = Blueprint("news", __name__, url_prefix="/novinky")
 
@@ -14,7 +15,14 @@ def detail(slug):
     article = Article.query.filter_by(slug=slug).first()
     if not article:
         abort(404)
-    return render_template("news/detail.html", article=article)
+    comments = (
+        Comment.query
+        .filter_by(target_type="article", target_id=article.id, is_approved=True)
+        .order_by(Comment.created_at.asc())
+        .all()
+    )
+    comment_form = CommentForm()
+    return render_template("news/detail.html", article=article, comments=comments, comment_form=comment_form)
 
 
 @bp.route("/rss.xml")

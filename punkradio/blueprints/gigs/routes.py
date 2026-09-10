@@ -1,6 +1,8 @@
 from datetime import date, timedelta
+from collections import defaultdict
 from flask import Blueprint, render_template, abort, Response
-from punkradio.models import Gig
+from punkradio.models import Gig, Comment
+from punkradio.forms import CommentForm
 
 
 bp = Blueprint("gigs", __name__, url_prefix="/koncerty")
@@ -31,7 +33,25 @@ def gigs_list():
         if g.latitude is not None and g.longitude is not None
     ]
 
-    return render_template("gigs/koncerty.html", gigs=gigs, today=today, map_gigs=map_gigs)
+    comments_by_gig = defaultdict(list)
+    if gigs:
+        gig_ids = [g.id for g in gigs]
+        rows = (
+            Comment.query
+            .filter(Comment.target_type == "gig", Comment.target_id.in_(gig_ids), Comment.is_approved == True)
+            .order_by(Comment.created_at.asc())
+            .all()
+        )
+        for c in rows:
+            comments_by_gig[c.target_id].append(c)
+
+    comment_form = CommentForm()
+
+    return render_template(
+        "gigs/koncerty.html",
+        gigs=gigs, today=today, map_gigs=map_gigs,
+        comments_by_gig=comments_by_gig, comment_form=comment_form,
+    )
 
 
 def _ics_escape(value: str) -> str:

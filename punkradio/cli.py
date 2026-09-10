@@ -26,6 +26,7 @@ Poznámka k SMSticket API:
 """
 import re
 import json
+import os
 import unicodedata
 from datetime import datetime
 
@@ -36,7 +37,7 @@ from flask import current_app
 from flask.cli import with_appcontext
 
 from .extensions import db
-from .models import Gig, Article, Band
+from .models import Gig, Article, Band, Comment, GigPhoto
 
 SMSTICKET_API_URL = "https://www.smsticket.cz/api/public/v1.1/events"
 
@@ -402,7 +403,92 @@ def seed_bands_command():
     click.echo(f"Hotovo. Nově přidáno: {created}, přeskočeno (už existovaly): {skipped}.")
 
 
+@click.command("pending")
+@with_appcontext
+def pending_command():
+    """Vypíše vše, co čeká na schválení — kapely a fotky."""
+    pending_bands = Band.query.filter_by(is_approved=False).order_by(Band.created_at.asc()).all()
+    pending_photos = GigPhoto.query.filter_by(is_approved=False).order_by(GigPhoto.created_at.asc()).all()
+
+    click.echo(f"=== Kapely čekající na schválení ({len(pending_bands)}) ===")
+    for b in pending_bands:
+        click.echo(f"  [{b.id}] {b.name} — {b.city or '?'} — schválit: flask approve-band {b.id}")
+
+    click.echo(f"\n=== Fotky čekající na schválení ({len(pending_photos)}) ===")
+    for p in pending_photos:
+        gig_info = f"ke koncertu #{p.gig_id}" if p.gig_id else "bez přiřazení"
+        click.echo(f"  [{p.id}] od {p.uploader_name} ({gig_info}) — {p.filename}")
+        click.echo(f"        schválit: flask approve-photo {p.id}  |  zamítnout: flask reject-photo {p.id}")
+
+    if not pending_bands and not pending_photos:
+        click.echo("Nic nečeká na schválení. 🤘")
+
+
+@click.command("approve-band")
+@click.argument("band_id", type=int)
+@with_appcontext
+def approve_band_command(band_id):
+    """Schválí kapelu přihlášenou přes formulář — objeví se na /kapely/."""
+    band = Band.query.get(band_id)
+    if not band:
+        click.echo(f"Kapela #{band_id} neexistuje.", err=True)
+        return
+    band.is_approved = True
+    db.session.commit()
+    click.echo(f"Schváleno: {band.name}")
+
+
+@click.command("approve-photo")
+@click.argument("photo_id", type=int)
+@with_appcontext
+def approve_photo_command(photo_id):
+    """Schválí fotku — objeví se v galerii na /fotky/."""
+    photo = GigPhoto.query.get(photo_id)
+    if not photo:
+        click.echo(f"Fotka #{photo_id} neexistuje.", err=True)
+        return
+    photo.is_approved = True
+    db.session.commit()
+    click.echo(f"Schváleno: fotka #{photo.id} od {photo.uploader_name}")
+
+
+@click.command("reject-photo")
+@click.argument("photo_id", type=int)
+@with_appcontext
+def reject_photo_command(photo_id):
+    """Zamítne a smaže fotku (i soubor z disku)."""
+    photo = GigPhoto.query.get(photo_id)
+    if not photo:
+        click.echo(f"Fotka #{photo_id} neexistuje.", err=True)
+        return
+    filepath = os.path.join(current_app.config["UPLOAD_FOLDER"], photo.filename)
+    if os.path.exists(filepath):
+        os.remove(filepath)
+    db.session.delete(photo)
+    db.session.commit()
+    click.echo(f"Smazáno: fotka #{photo_id}")
+
+
+@click.command("delete-comment")
+@click.argument("comment_id", type=int)
+@with_appcontext
+def delete_comment_command(comment_id):
+    """Smaže komentář (např. spam nebo nevhodný obsah)."""
+    comment = Comment.query.get(comment_id)
+    if not comment:
+        click.echo(f"Komentář #{comment_id} neexistuje.", err=True)
+        return
+    db.session.delete(comment)
+    db.session.commit()
+    click.echo(f"Smazáno: komentář #{comment_id} od {comment.author_name}")
+
+
 def register_cli(app):
     app.cli.add_command(sync_gigs_command)
     app.cli.add_command(add_news_command)
     app.cli.add_command(seed_bands_command)
+    app.cli.add_command(pending_command)
+    app.cli.add_command(approve_band_command)
+    app.cli.add_command(approve_photo_command)
+    app.cli.add_command(reject_photo_command)
+    app.cli.add_command(delete_comment_command)

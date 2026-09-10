@@ -20,3 +20,5 @@ dist/
 build/
 .mypy_cache/
 .pytest_cache/
+punkradio/static/uploads/gigs/*
+!punkradio/static/uploads/gigs/.gitkeep

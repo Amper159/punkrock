@@ -53,11 +53,32 @@
   {% if gigs %}
     <div class="gig-grid">
       {% for gig in gigs %}
-        <div class="gig-card">
+        <div class="gig-card" id="gig-{{ gig.id }}">
           <div class="date">{{ gig.date.strftime('%d.%m.%Y') }}</div>
           <h3>{{ gig.lineup|join(' | ') if gig.lineup else 'Neznámá kapela' }}</h3>
           <p class="place">{{ gig.city or 'Neznámé město' }}{% if gig.venue %} – {{ gig.venue }}{% endif %}</p>
           <a href="{{ url_for('gigs.gig_ics', gig_id=gig.id) }}" class="ics-link">+ přidat do kalendáře</a>
+
+          <div class="gig-comments">
+            {% set gig_comments = comments_by_gig.get(gig.id, []) %}
+            {% if gig_comments %}
+              <ul class="comment-list">
+                {% for c in gig_comments %}
+                  <li><strong>{{ c.author_name }}</strong> {{ c.text }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            <details class="comment-toggle">
+              <summary>Byl jsi tam? Napiš pár slov {% if gig_comments %}({{ gig_comments|length }}){% endif %}</summary>
+              <form method="post" action="{{ url_for('comments.add_comment', target_type='gig', target_id=gig.id) }}" class="comment-form">
+                {{ comment_form.hidden_tag() }}
+                {{ comment_form.author_name(placeholder="Jméno") }}
+                {{ comment_form.text(placeholder="Jak to bylo?", rows="2") }}
+                <div class="hp-field" aria-hidden="true">{{ comment_form.website() }}</div>
+                <button type="submit">Přidat</button>
+              </form>
+            </details>
+          </div>
         </div>
       {% endfor %}
     </div>

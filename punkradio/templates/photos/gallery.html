@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Fotky z koncertů — Punkrock 77{% endblock %}
+{% block content %}
+
+<section>
+  <div class="section-head">
+    <h1 style="border:none; margin:0;">Fotky ze scény</h1>
+    <a href="{{ url_for('photos.submit_photo') }}" class="see-all">+ nahrát fotku</a>
+  </div>
+  <p style="max-width:600px; font-size:0.9rem; opacity:0.85; margin-bottom:30px;">
+    Fotky, co posílá přímo komunita — z pařeb, z pódia i z první řady u pitu.
+  </p>
+
+  {% if photos %}
+    <div class="photo-grid">
+      {% for p in photos %}
+        <div class="photo-card">
+          <img src="{{ url_for('static', filename='uploads/gigs/' + p.filename) }}" alt="{{ p.caption or 'Fotka z koncertu' }}" loading="lazy">
+          <div class="caption">
+            <span class="who">{{ p.uploader_name }}</span>{% if p.caption %} — {{ p.caption }}{% endif %}
+            {% if p.gig %}<br><span style="opacity:0.6;">{{ p.gig.lineup|join(', ') if p.gig.lineup else '' }} · {{ p.gig.date.strftime('%d.%m.%Y') }}</span>{% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">Zatím tu nejsou žádné fotky. <a href="{{ url_for('photos.submit_photo') }}">Nahraj první!</a></p>
+  {% endif %}
+</section>
+{% endblock %}

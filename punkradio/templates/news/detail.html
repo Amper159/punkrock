@@ -22,6 +22,26 @@
     </article>
   {% endif %}
 
+  <div class="article-comments">
+    <h2>Komentáře{% if comments %} ({{ comments|length }}){% endif %}</h2>
+    {% if comments %}
+      <ul class="comment-list">
+        {% for c in comments %}
+          <li><strong>{{ c.author_name }}</strong>: {{ c.text }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted" style="margin-bottom:12px;">Zatím žádné komentáře — buď první.</p>
+    {% endif %}
+    <form method="post" action="{{ url_for('comments.add_comment', target_type='article', target_id=article.id) }}" class="comment-form">
+      {{ comment_form.hidden_tag() }}
+      {{ comment_form.author_name(placeholder="Jméno") }}
+      {{ comment_form.text(placeholder="Co si o tom myslíš?", rows="3") }}
+      <div class="hp-field" aria-hidden="true">{{ comment_form.website() }}</div>
+      <button type="submit">Přidat komentář</button>
+    </form>
+  </div>
+
   <div class="back-link">
     <a href="{{ url_for('news.list_news') }}" class="btn-back">
       ← Zpět na novinky
