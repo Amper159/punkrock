@@ -8,11 +8,19 @@
   <p class="meta">
     {{ article.published_at.strftime('%d.%m.%Y') }}
     {% if article.band %} · Kapela: <strong>{{ article.band }}</strong>{% endif %}
+    {% if article.source_name %} · Zdroj: <strong>{{ article.source_name }}</strong>{% endif %}
   </p>
 
-  <article class="content">
-    {{ article.content | safe }}
-  </article>
+  {% if article.source_url %}
+    <p class="perex">{{ article.perex or 'Tahle novinka je jen odkaz na originál — celý text najdeš na zdrojovém webu.' }}</p>
+    <a href="{{ article.source_url }}" target="_blank" rel="noopener" class="btn-read">
+      Celý článek na {{ article.source_name or 'zdroji' }} ↗
+    </a>
+  {% else %}
+    <article class="content">
+      {{ article.content | safe }}
+    </article>
+  {% endif %}
 
   <div class="back-link">
     <a href="{{ url_for('news.list_news') }}" class="btn-back">

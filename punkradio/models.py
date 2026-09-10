@@ -17,6 +17,8 @@ class Gig(db.Model):
     city = db.Column(db.String(80))
     venue = db.Column(db.String(120))
     lineup = db.Column(db.JSON)             # ["Kapela A", "Kapela B"]
+    source = db.Column(db.String(40))                       # "manual" / "smsticket"
+    external_id = db.Column(db.String(120), unique=True, index=True, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
 
 class Article(db.Model):
@@ -29,4 +31,6 @@ class Article(db.Model):
     excerpt = db.Column(db.Text)
     body = db.Column(db.Text)
     tags = db.Column(db.JSON)
+    source_url = db.Column(db.String(500))    # externí odkaz na plný článek (curated link-out)
+    source_name = db.Column(db.String(120))   # název zdroje, např. "insounder.org"
     published_at = db.Column(db.DateTime, default=datetime.utcnow, index=True)
