@@ -14,21 +14,36 @@
   </div>
 
   {% if map_gigs %}
-    <div id="gigs-map" class="gigs-map"></div>
+    <div class="map-frame">
+      <div class="map-label">Mapa koncertů</div>
+      <div id="gigs-map" class="gigs-map"></div>
+    </div>
     <script>
       (function () {
         var gigs = {{ map_gigs | tojson }};
-        var map = L.map('gigs-map').setView([49.8, 15.5], 7);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; OpenStreetMap přispěvatelé',
+        var map = L.map('gigs-map', { scrollWheelZoom: false }).setView([49.8, 15.5], 7);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; OpenStreetMap, &copy; CARTO',
           maxZoom: 18,
+          subdomains: 'abcd',
         }).addTo(map);
+
+        var punkIcon = L.divIcon({
+          className: 'punk-marker',
+          html: '<span></span>',
+          iconSize: [16, 16],
+          popupAnchor: [0, -8],
+        });
+
         gigs.forEach(function (g) {
-          var marker = L.marker([g.lat, g.lng]).addTo(map);
+          var marker = L.marker([g.lat, g.lng], { icon: punkIcon }).addTo(map);
           marker.bindPopup(
-            '<strong>' + g.name + '</strong><br>' +
-            g.date + ' &middot; ' + g.venue + (g.city ? ', ' + g.city : '') +
-            '<br><a href="/koncerty/' + g.id + '.ics">Přidat do kalendáře</a>'
+            '<div class="punk-popup">' +
+              '<div class="punk-popup-date">' + g.date + '</div>' +
+              '<div class="punk-popup-name">' + g.name + '</div>' +
+              '<div class="punk-popup-place">' + g.venue + (g.city ? ', ' + g.city : '') + '</div>' +
+              '<a href="/koncerty/' + g.id + '.ics">+ přidat do kalendáře</a>' +
+            '</div>'
           );
         });
       })();
