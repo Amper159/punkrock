@@ -36,7 +36,7 @@ from flask import current_app
 from flask.cli import with_appcontext
 
 from .extensions import db
-from .models import Gig, Article
+from .models import Gig, Article, Band
 
 SMSTICKET_API_URL = "https://www.smsticket.cz/api/public/v1.1/events"
 
@@ -243,6 +243,153 @@ def add_news_command(title, source_url, source_name, perex, band):
     click.echo(f"Přidáno: {title}  ({slug}) -> {source_url}")
 
 
+SEED_BANDS = [
+    {
+        "name": "Visací zámek",
+        "city": "Praha",
+        "styles": "punk, oldschool",
+        "about": "Jedna z úplně prvních pražských punkových kapel, na scéně od roku 1982. Ikona české oldschool punkové scény.",
+    },
+    {
+        "name": "Plexis",
+        "city": "Praha",
+        "styles": "punk rock",
+        "about": "Pražská punková kapela vedená Petrem Hoškem, na scéně od 80. let.",
+    },
+    {
+        "name": "Tři sestry",
+        "city": "Praha",
+        "styles": "punk rock, hardcore",
+        "about": "Legendární kapela z branické hospody, na scéně od roku 1985. Frontman Lou Fanánek Hagen kapelu proslavil charakteristickým hlasem i texty.",
+    },
+    {
+        "name": "Totální nasazení",
+        "city": "Slaný",
+        "styles": "street punk",
+        "about": "Slánská parta, která už od roku 1990 šíří pozitivní energii a chytlavé punkrockové hymny s nadhledem i ironií.",
+    },
+    {
+        "name": "The Fialky",
+        "city": "Praha",
+        "styles": "punk 77, street punk",
+        "about": "Pražská kapela na scéně od roku 2000, hudebně navazující na první vlnu punku 77'. Patří mezi nejznámější současné české punkrockové kapely zpívající v češtině.",
+    },
+    {
+        "name": "Tragedis",
+        "city": "Jindřichův Hradec",
+        "styles": "hardcore",
+        "about": "Poctivý punkrock s ostrými riffy a přímočarými texty o životě, společnosti i vlastní cestě.",
+    },
+    {
+        "name": "Vypsaná fixa",
+        "city": "Pardubice",
+        "styles": "pop punk, ska punk",
+        "about": "Pardubická kapela založená v roce 1994, se zpěvákem Michalem Maredou. Jedna z nejposlouchanějších českých pop punkových kapel.",
+    },
+    {
+        "name": "E!E",
+        "city": "Příbram",
+        "styles": "punk'n'roll",
+        "about": "Příbramská punk'n'rollová kapela s dlouhou historií a nezaměnitelným syrovým zvukem.",
+    },
+    {
+        "name": "Volant",
+        "city": "Pardubice",
+        "styles": "punk-power",
+        "about": "Svižná pardubická punk-power kapela, pravidelný host na punkových festivalech po celé republice.",
+    },
+    {
+        "name": "Glejt",
+        "city": "Dubňany",
+        "styles": "punk, hardcore",
+        "about": "Kapela z Dubňan hrající rychlý, nekompromisní punk hraničící s hardcore.",
+    },
+    {
+        "name": "Do řady!",
+        "city": "Bílina / Teplice",
+        "styles": "punk",
+        "about": "Bílinsko-teplická formace na scéně téměř 40 let, i po tak dlouhé době stále aktivní a vydávající nové desky.",
+    },
+    {
+        "name": "Zeměžluč",
+        "city": None,
+        "styles": "punk",
+        "about": "Jedna z posledních stále fungujících československých punkových legend, v roce 2026 slaví 40 let na scéně.",
+    },
+    {
+        "name": "Znouzectnost",
+        "city": None,
+        "styles": "folk punk",
+        "about": "Kapela spojující punkovou energii s folkovou odnoží, stálice na českých open-air festivalech.",
+    },
+    {
+        "name": "Nežfaleš",
+        "city": None,
+        "styles": "punk",
+        "about": "Pravidelný host punkových open-air festivalů a benefičních akcí po celé republice.",
+    },
+    {
+        "name": "Deratizéři",
+        "city": "Slaný",
+        "styles": "punk",
+        "about": "Další kapela ze slánské punkové scény, často po boku Totálního nasazení.",
+    },
+    {
+        "name": "Vision Days",
+        "city": None,
+        "styles": "punk, ska",
+        "about": "Punkrock se srdcem i saxofonem — kombinace melodie a energie s prvky ska.",
+    },
+    {
+        "name": "KT Bandits",
+        "city": None,
+        "styles": "punk, hardcore",
+        "about": "Tvrdý punk-hardcore, pravidelně na sestavách větších punkových open-airů.",
+    },
+    {
+        "name": "Švindl",
+        "city": None,
+        "styles": "punk rock",
+        "about": "Kapela z okruhu punkrockových večírků a menších klubových akcí po celé republice.",
+    },
+    {
+        "name": "Spray",
+        "city": None,
+        "styles": "punk",
+        "about": "Kapela z československé punkové scény, v roce 2026 znovu oživila starou sestavu a vydala nahrávky z roku 1984.",
+    },
+    {
+        "name": "Načo názov",
+        "city": None,
+        "styles": "punk",
+        "about": "Slovenská punková kapela, pravidelně koncertující i na českých punkových akcích.",
+    },
+]
+
+
+@click.command("seed-bands")
+@with_appcontext
+def seed_bands_command():
+    """Jednorázově naplní stránku Kapely ověřeným seznamem českých/československých punkových kapel."""
+    created, skipped = 0, 0
+    for entry in SEED_BANDS:
+        if Band.query.filter_by(name=entry["name"]).first():
+            skipped += 1
+            continue
+        band = Band(
+            name=entry["name"],
+            city=entry["city"],
+            styles=entry["styles"],
+            about=entry["about"],
+            is_approved=True,
+        )
+        db.session.add(band)
+        created += 1
+    db.session.commit()
+    click.echo(f"Hotovo. Nově přidáno: {created}, přeskočeno (už existovaly): {skipped}.")
+
+
 def register_cli(app):
     app.cli.add_command(sync_gigs_command)
     app.cli.add_command(add_news_command)
+    app.cli.add_command(seed_bands_command)
